@@ -7,14 +7,16 @@ export default function Callback() {
   const { setToken } = useAuth();
 
   useEffect(() => {
+    console.log('Callback component mounted');
     const hash = window.location.hash; // Get the URL hash
+    console.log('Hash:', hash); // Log the hash
     let token = window.localStorage.getItem('token'); // Check localStorage for token
-    console.log('Callback URL hash:', hash);
-
+  
     // Check if the token exists in localStorage or in the URL hash
     if (!token && hash) {
       token = new URLSearchParams(hash.substring(1)).get('access_token'); // Extract access_token
-      
+      console.log('Token extracted from hash:', token); // Log extracted token
+  
       if (token) {
         // Store the token in localStorage and update the state
         window.localStorage.setItem('token', token); 
@@ -22,7 +24,6 @@ export default function Callback() {
         // Redirect to the main application
         navigate('/'); 
       } else {
-        // If no token is found, redirect back to the landing page
         console.error('No token found in URL');
         navigate('/');
       }
@@ -35,6 +36,6 @@ export default function Callback() {
       navigate('/');
     }
   }, [setToken, navigate]);
-
+  
   return <div>Logging in...</div>; // Loading message
 }

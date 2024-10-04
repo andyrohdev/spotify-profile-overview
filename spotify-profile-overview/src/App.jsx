@@ -18,7 +18,7 @@ export default function App() {
   }, [token]);
 
   return (
-    <Router basename="/">  {/* Basename is set to "/" */}
+    <Router basename="/spotify-profile-overview">
       <Routes>
         <Route 
           path="/" 

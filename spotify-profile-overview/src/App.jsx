@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  // Use BrowserRouter
 import { useAuth } from './components/AuthProvider';
 import Profile from './components/Profile';
+import NotFound from './components/NotFound'; // Adjust the path as needed
 import Callback from './components/Callback';
 import LandingPage from './components/LandingPage';
 
@@ -28,8 +29,10 @@ export default function App() {
               : <LandingPage />
           } 
         />
-        <Route path="/callback" element={<Callback />} />  {/* Keep the path as is */}
+        <Route path="/callback" element={<Callback />} />
+        <Route path="*" element={<NotFound />} />  {/* Fallback route for unmatched paths */}
       </Routes>
     </Router>
   );
+  
 }

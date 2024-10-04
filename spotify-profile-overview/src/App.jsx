@@ -6,6 +6,7 @@ import NotFound from './components/NotFound'; // Adjust the path as needed
 import Callback from './components/Callback';
 import LandingPage from './components/LandingPage';
 
+
 export default function App() {
   const { token } = useAuth();
 
@@ -30,6 +31,7 @@ export default function App() {
           } 
         />
         <Route path="/callback" element={<Callback />} />
+
         <Route path="*" element={<NotFound />} />  {/* Fallback route for unmatched paths */}
       </Routes>
     </Router>

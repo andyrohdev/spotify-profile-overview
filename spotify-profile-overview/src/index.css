@@ -3,21 +3,21 @@
   font-family: 'Lato';
   font-style: normal;
   font-weight: 300;
-  src: url('./assets/fonts/Lato-Light.ttf') format('truetype');  /* Adjusted path */
+  src: url('./assets/fonts/Lato-Light.ttf') format('truetype');  /* Relative to the CSS file */
 }
 
 @font-face {
   font-family: 'Lato';
   font-style: normal;
   font-weight: 400;
-  src: url('./assets/fonts/Lato-Regular.ttf') format('truetype');  /* Adjusted path */
+  src: url('./assets/fonts/Lato-Regular.ttf') format('truetype');  /* Relative to the CSS file */
 }
 
 @font-face {
   font-family: 'Lato';
   font-style: bold;
   font-weight: 700;
-  src: url('./assets/fonts/Lato-Bold.ttf') format('truetype');  /* Adjusted path */
+  src: url('./assets/fonts/Lato-Bold.ttf') format('truetype');  /* Relative to the CSS file */
 }
 
 /* Global styles */
@@ -53,16 +53,16 @@ a:hover {
 }
 
 /* Body */
+/* Body */
 body {
   font-family: 'Lato', sans-serif;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-width: 320px;
   min-height: 100vh;
   background-color: var(--hover-dark);
+  display: block; /* Remove flexbox here */
 }
+
 
 /* Headings */
 h1 {

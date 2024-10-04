@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  // Use BrowserRouter
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import { useAuth } from './components/AuthProvider';
 import Profile from './components/Profile';
 import NotFound from './components/NotFound'; // Adjust the path as needed
@@ -20,7 +20,7 @@ export default function App() {
   }, [token]);
 
   return (
-    <Router basename="/spotify-profile-overview">
+    <Router>
       <Routes>
         <Route 
           path="/" 

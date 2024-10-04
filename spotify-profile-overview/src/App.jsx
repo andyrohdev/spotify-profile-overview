@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';  // Use HashRouter here
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  // Use BrowserRouter
 import { useAuth } from './components/AuthProvider';
 import Profile from './components/Profile';
 import Callback from './components/Callback';
@@ -18,7 +18,7 @@ export default function App() {
   }, [token]);
 
   return (
-    <Router basename="/">  {/* Remove basename as it's not needed with HashRouter */}
+    <Router basename="/">  {/* Basename is set to "/" */}
       <Routes>
         <Route 
           path="/" 
@@ -28,7 +28,7 @@ export default function App() {
               : <LandingPage />
           } 
         />
-        <Route path="/callback" element={<Callback />} />
+        <Route path="/callback" element={<Callback />} />  {/* Keep the path as is */}
       </Routes>
     </Router>
   );

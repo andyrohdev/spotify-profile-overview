@@ -16,9 +16,9 @@ export function AuthProvider({ children }) {
 
   const login = () => {
     const CLIENT_ID = '3dbc0c6e8950478687663a14bae7adea';  // Your actual Client ID
-    const REDIRECT_URI = 'https://andyrohdev.github.io/spotify-profile-overview/#/callback';  // GitHub Pages URL
+    const REDIRECT_URI = 'https://andyrohdev.github.io/spotify-profile-overview/callback';  // GitHub Pages URL
     const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
-    const RESPONSE_TYPE = 'token';
+    const RESPONSE_TYPE = 'token';  // Ensure this is correct
     const SCOPES = 'user-read-private user-read-email';
   
     // Build the full login URL and log it

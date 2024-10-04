@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';  // Use HashRouter here
 import { useAuth } from './components/AuthProvider';
 import Profile from './components/Profile';
 import Callback from './components/Callback';
@@ -18,7 +18,7 @@ export default function App() {
   }, [token]);
 
   return (
-    <Router basename="/spotify-profile-overview">
+    <Router basename="/">  {/* Remove basename as it's not needed with HashRouter */}
       <Routes>
         <Route 
           path="/" 

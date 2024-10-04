@@ -10,12 +10,28 @@ export default function Callback() {
     const hash = window.location.hash;
     let token = window.localStorage.getItem('token');
 
-    // If no token exists in localStorage but found in URL hash, set it
+    // Check if the token exists in localStorage or in the URL hash
     if (!token && hash) {
       token = new URLSearchParams(hash.substring(1)).get('access_token');
-      window.localStorage.setItem('token', token);  // Store token in localStorage
-      setToken(token);  // Update AuthProvider with token
-      navigate('/');  // Redirect to profile page
+      
+      if (token) {
+        // Store the token in localStorage and update the state
+        window.localStorage.setItem('token', token);
+        setToken(token);
+        // Redirect to the profile page
+        navigate('/');
+      } else {
+        // If no token is found, redirect back to the login page
+        console.error('No token found in URL');
+        navigate('/');
+      }
+    } else if (token) {
+      // If the token exists in localStorage, use it
+      setToken(token);
+      navigate('/');
+    } else {
+      // If no token is found in both localStorage and URL hash, redirect to login
+      navigate('/');
     }
   }, [setToken, navigate]);
 

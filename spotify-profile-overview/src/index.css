@@ -1,68 +1,154 @@
+/* Import fonts globally */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  src: url('/src/assets/fonts/Lato-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/src/assets/fonts/Lato-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato';
+  font-style: bold;
+  font-weight: 700;
+  src: url('/src/assets/fonts/Lato-Bold.ttf') format('truetype');
+}
+
+/* Global styles */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: 'Lato', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Spotify's color scheme */
+  color-scheme: dark;
+  color: #ffffff;  /* Light text */
+  background-color: #121212;  /* Dark background */
 
+  /* Optimizations for text rendering */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --spotify-green: #1db954;  /* Spotify green */
+  --hover-dark: #1a1a1a;  /* Slightly lighter dark for hover effects */
+  --text-muted: #b3b3b3;  /* Muted text color */
 }
 
+/* Global links */
 a {
+  color: var(--spotify-green);
+  text-decoration: none;
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #1ed760;  /* Brighter green on hover */
 }
 
+/* Body */
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  justify-content: center;
+  align-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--hover-dark);
 }
 
+/* Headings */
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1em;
 }
 
+/* Buttons with Spotify styling */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  background-color: var(--spotify-green);
+  color: #fff;
+  border: none;
+  border-radius: 50px;  /* Spotify-like rounded buttons */
+  padding: 0.8em 2em;
   font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  font-weight: 700;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: background-color 0.3s ease;
 }
+
 button:hover {
-  border-color: #646cff;
+  background-color: #1ed760;  /* Brighter green on hover */
 }
+
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px solid var(--spotify-green);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* Muted text */
+.muted-text {
+  color: var(--text-muted);
+  font-size: 0.9em;
+}
+
+/* General container styling */
+.container {
+  background-color: #181818;  /* Dark container */
+  border-radius: 10px;
+  padding: 2em;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Spotify-style card */
+.card {
+  background-color: #282828;
+  padding: 1.5em;
+  border-radius: 8px;
+  margin-bottom: 1em;
+}
+
+.card:hover {
+  background-color: var(--hover-dark);  /* Darker on hover */
+}
+
+/* Spotify-style navigation link */
+.nav-link {
+  color: var(--spotify-green);
+  text-decoration: none;
+  font-size: 1.2em;
+  padding: 0.5em;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #1ed760;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2em;
   }
-  a:hover {
-    color: #747bff;
-  }
+
   button {
-    background-color: #f9f9f9;
+    padding: 0.6em 1.5em;
+    font-size: 0.9em;
+  }
+
+  .container {
+    padding: 1.5em;
   }
 }
+

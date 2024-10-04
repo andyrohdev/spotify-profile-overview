@@ -9,6 +9,7 @@ export default function Callback() {
   useEffect(() => {
     const hash = window.location.hash; // Get the URL hash
     let token = window.localStorage.getItem('token'); // Check localStorage for token
+    console.log('Callback URL hash:', hash);
 
     // Check if the token exists in localStorage or in the URL hash
     if (!token && hash) {

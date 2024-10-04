@@ -3,22 +3,23 @@
   font-family: 'Lato';
   font-style: normal;
   font-weight: 300;
-  src: url('/src/assets/fonts/Lato-Light.ttf') format('truetype');
+  src: url('/spotify-profile-overview/assets/fonts/Lato-Light.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Lato';
   font-style: normal;
   font-weight: 400;
-  src: url('/src/assets/fonts/Lato-Regular.ttf') format('truetype');
+  src: url('/spotify-profile-overview/assets/fonts/Lato-Regular.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Lato';
   font-style: bold;
   font-weight: 700;
-  src: url('/src/assets/fonts/Lato-Bold.ttf') format('truetype');
+  src: url('/spotify-profile-overview/assets/fonts/Lato-Bold.ttf') format('truetype');
 }
+
 
 /* Global styles */
 :root {

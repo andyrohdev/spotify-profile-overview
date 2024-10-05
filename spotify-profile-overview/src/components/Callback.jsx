@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './AuthProvider';
+import { useAuth } from './AuthProvider';  // Ensure you're using the AuthProvider
 
 export default function Callback() {
   const navigate = useNavigate();
@@ -13,19 +13,23 @@ export default function Callback() {
     let hash = window.location.hash;
     console.log('Full URL hash:', hash);  // Log the entire hash string
 
-    // Only attempt to extract the token if the URL contains "access_token"
-    if (hash.includes('access_token')) {
-      const tokenMatch = hash.match(/access_token=([^&]*)/);
-      const token = tokenMatch ? tokenMatch[1] : null;
+    // Handle the situation where there's a double hash (i.e., `/#/callback#access_token=...`)
+    // First, check if we have `/#/callback` and strip that part
+    if (hash.includes('/callback#')) {
+      hash = hash.split('/callback#')[1]; // Removes the `#/callback#` part
+    }
 
-      console.log('Extracted access token:', token);  // Log the extracted token
-      if (token) {
-        window.localStorage.setItem('token', token);
-        setToken(token);
-        navigate('/');
-      } else {
-        console.error('No access token found in URL');
-      }
+    // Now, create a URLSearchParams object to extract the access token
+    const params = new URLSearchParams(hash);
+    const token = params.get('access_token');
+    
+    console.log('Extracted access token:', token);  // Log the extracted token
+    if (token) {
+      window.localStorage.setItem('token', token);
+      setToken(token);
+      navigate('/');
+    } else {
+      console.error('No access token found in URL');
     }
   }, [setToken, navigate]);
 

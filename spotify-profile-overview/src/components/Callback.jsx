@@ -13,8 +13,15 @@ export default function Callback() {
     let hash = window.location.hash;
     console.log('Full URL hash:', hash);  // Log the entire hash string
 
+    // Ensure that the URL contains the correct subdirectory
+    if (!window.location.pathname.includes('/spotify-profile-overview')) {
+      const correctUrl = window.location.origin + '/spotify-profile-overview' + window.location.hash;
+      console.log('Correcting URL to:', correctUrl);
+      window.location.replace(correctUrl);  // Redirect to the correct path
+      return;  // Stop execution after redirect
+    }
+
     // Handle the situation where there's a double hash (i.e., `/#/callback#access_token=...`)
-    // First, check if we have `/#/callback` and strip that part
     if (hash.includes('/callback#')) {
       hash = hash.split('/callback#')[1]; // Removes the `#/callback#` part
     }

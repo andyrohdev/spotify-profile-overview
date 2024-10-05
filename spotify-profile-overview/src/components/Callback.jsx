@@ -8,34 +8,24 @@ export default function Callback() {
 
   useEffect(() => {
     console.log('Callback component mounted');
-    const hash = window.location.hash; // Get the URL hash
-    console.log('Hash:', hash); // Log the hash
-    let token = window.localStorage.getItem('token'); // Check localStorage for token
-  
-    // Check if the token exists in localStorage or in the URL hash
-    if (!token && hash) {
-      token = new URLSearchParams(hash.substring(1)).get('access_token'); // Extract access_token
-      console.log('Token extracted from hash:', token); // Log extracted token
-  
+    const hash = window.location.hash;
+    console.log('Full URL hash:', hash);  // Log the entire hash string
+    
+    if (hash) {
+      const token = new URLSearchParams(hash.substring(1)).get('access_token');
+      console.log('Extracted access token:', token);  // Log the extracted token
       if (token) {
-        // Store the token in localStorage and update the state
-        window.localStorage.setItem('token', token); 
-        setToken(token); // Update the token in context
-        // Redirect to the main application
-        navigate('/'); 
-      } else {
-        console.error('No token found in URL');
+        window.localStorage.setItem('token', token);
+        console.log('Token saved to localStorage:', token);  // Confirm token is saved
+        setToken(token);
         navigate('/');
+      } else {
+        console.error('No access token found in URL');
       }
-    } else if (token) {
-      // If the token exists in localStorage, use it
-      setToken(token);
-      navigate('/'); // Redirect to the main application
     } else {
-      // If no token is found in both localStorage and URL hash, redirect to landing page
-      navigate('/');
+      console.error('No hash in URL');
     }
   }, [setToken, navigate]);
-  
+
   return <div>Logging in...</div>; // Loading message
 }

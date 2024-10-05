@@ -16,12 +16,14 @@ export function AuthProvider({ children }) {
 
   const login = () => {
     const CLIENT_ID = '3dbc0c6e8950478687663a14bae7adea';
-    const REDIRECT_URI = 'https://andyrohdev.github.io/spotify-profile-overview/#/callback'; // GitHub Pages URL with hash
+    const REDIRECT_URI = window.location.hostname === 'localhost' 
+  ? 'http://localhost:5173/#/callback' 
+  : 'https://andyrohdev.github.io/spotify-profile-overview/#/callback';
     const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
     const RESPONSE_TYPE = 'token';
     const SCOPES = 'user-read-private user-read-email';
   
-    const loginUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPES}`;
+    const loginUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=${RESPONSE_TYPE}&scope=${SCOPES}`;
     console.log('Login URL:', loginUrl);
     window.location.href = loginUrl;
   };

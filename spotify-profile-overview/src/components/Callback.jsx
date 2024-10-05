@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './AuthProvider';
+import { useAuth } from './AuthProvider';  // Ensure you're using the AuthProvider
 
 export default function Callback() {
   const navigate = useNavigate();
@@ -8,37 +8,36 @@ export default function Callback() {
 
   useEffect(() => {
     console.log('Callback component mounted');
-
-    // Ensure that the URL contains the correct subdirectory before anything else
-    if (!window.location.pathname.includes('/spotify-profile-overview')) {
-      const correctUrl = window.location.origin + '/spotify-profile-overview' + window.location.hash;
-      console.log('Correcting URL to:', correctUrl);
-      window.location.replace(correctUrl);
-      return;  // Stop execution after redirect
-    }
-
-    // Get the full URL hash after confirming the correct path
+  
     let hash = window.location.hash;
     console.log('Full URL hash:', hash);
-
-    // Handle situation where there's a double hash (e.g., /#/callback#access_token=...)
-    if (hash.includes('/callback#')) {
-      hash = hash.split('/callback#')[1]; // Removes the `#/callback#` part
+  
+    // Check if the path is missing the project folder and correct it
+    if (!window.location.pathname.includes('/spotify-profile-overview')) {
+      const correctedUrl = `${window.location.origin}/spotify-profile-overview${window.location.hash}`;
+      console.log('Correcting URL to:', correctedUrl);
+      window.location.replace(correctedUrl);
+      return;  // Stop execution after redirect
     }
-
-    // Create URLSearchParams object to extract access token
+  
+    // Handle the token extraction as before
+    if (hash.includes('/callback#')) {
+      hash = hash.split('/callback#')[1];
+    }
+  
     const params = new URLSearchParams(hash);
     const token = params.get('access_token');
-
     console.log('Extracted access token:', token);
+  
     if (token) {
       window.localStorage.setItem('token', token);
       setToken(token);
-      navigate('/spotify-profile-overview');  // Redirect to the home/profile page
+      navigate('/');
     } else {
       console.error('No access token found in URL');
     }
   }, [setToken, navigate]);
+  
 
   return <div>Logging in...</div>;  // Loading message
 }

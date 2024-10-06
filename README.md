@@ -1,2 +1,2 @@
 # spotify-profile-overview
-Spotify Profile Overview App to View Personalized Information about your Account!
+Spotify Profile Overview App to View Personalized Information and Listening Statistics about your Account!

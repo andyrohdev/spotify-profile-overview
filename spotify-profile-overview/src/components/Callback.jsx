@@ -9,34 +9,26 @@ export default function Callback() {
   useEffect(() => {
     console.log('Callback component mounted');
 
-    let hash = window.location.hash;
-    console.log('Full URL hash:', hash);
+    let url = window.location.href;  // Get the full URL
+    console.log('Full URL:', url);
 
-    // Check if the path is missing the project folder and correct it
-    if (!window.location.pathname.includes('/spotify-profile-overview')) {
-      const correctedUrl = `${window.location.origin}/spotify-profile-overview${window.location.hash}`;
-      console.log('Correcting URL to:', correctedUrl);
-      window.location.replace(correctedUrl);
-      return;  // Stop execution after redirect
-    }
+    // Manually handle the specific URL structure for GitHub Pages
+    if (url.includes('#/callback#access_token=')) {
+      const tokenStartIndex = url.indexOf('access_token=') + 'access_token='.length;
+      const tokenEndIndex = url.indexOf('&', tokenStartIndex);  // End at the first '&'
+      const token = url.substring(tokenStartIndex, tokenEndIndex);  // Extract the token
 
-    // On GitHub Pages, the hash part might contain "/#/callback" before the token
-    if (hash.includes('#/callback#')) {
-      hash = hash.split('#/callback#')[1];  // Fix the splitting logic for GitHub Pages
-    } else if (hash.includes('#access_token')) {
-      hash = hash.split('#')[1];  // Adjust if the token directly follows '#'
-    }
+      console.log('Manually extracted access token:', token);
 
-    const params = new URLSearchParams(hash);
-    const token = params.get('access_token');
-    console.log('Extracted access token:', token);
-
-    if (token) {
-      window.localStorage.setItem('token', token);
-      setToken(token);
-      navigate('/');
+      if (token) {
+        window.localStorage.setItem('token', token);  // Store the token
+        setToken(token);  // Set the token in your auth context
+        navigate('/');  // Navigate to the main page after login
+      } else {
+        console.error('No access token found in the URL');
+      }
     } else {
-      console.error('No access token found in URL');
+      console.error('URL structure does not match the expected pattern');
     }
   }, [setToken, navigate]);
 

@@ -1,0 +1,123 @@
+/* Profile container */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Profile header */
+  .profile-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    object-fit: cover;  /* This ensures the image maintains aspect ratio without being stretched */
+    image-rendering: -webkit-optimize-contrast; /* Enhances image rendering */
+    image-rendering: crisp-edges; /* Make image rendering clearer where possible */
+  }
+  
+  .profile-name {
+    font-size: 48px;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .profile-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    color: #1db954;
+    margin-top: 10px;
+  }
+
+  .stat-item p {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .stat-item span {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #b3b3b3;
+  }
+  
+  /* Log Out Button */
+  .logout-button {
+    background-color: #1db954;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  
+  /* Profile Content */
+  .profile-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .top-artists, .top-tracks {
+    width: 48%;
+  }
+  
+  .artist-list, .track-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .see-more-button {
+    padding: 8px 16px;
+    background-color: #1db954;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+
+  .see-more-button:hover {
+    background-color: #1ed760;
+  }
+
+  .logout-button:hover {
+    background-color: #1ed760;
+  }
+
+  /* Adjust width for larger screens */
+  @media screen and (min-width: 1024px) {
+    .profile-content {
+      justify-content: space-evenly;
+    }
+  }
+
+  /* Fade-in effect for buttons */
+  .profile-container:hover .see-more-button, 
+  .profile-container:hover .logout-button {
+    opacity: 1;
+    transform: translateY(0);
+  }

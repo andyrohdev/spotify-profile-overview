@@ -28,9 +28,11 @@ export function AuthProvider({ children }) {
   };
 
   const logout = () => {
-    setToken(null);
-    window.localStorage.removeItem('token');
-  };
+  window.localStorage.removeItem('token');  // Remove the token
+  window.localStorage.removeItem('isLoggedIn');  // Remove the logged-in status
+  window.location.reload();  // Reload the page to reflect the logged-out state
+};
+
 
   return (
     <AuthContext.Provider value={{ token, setToken, login, logout }}>

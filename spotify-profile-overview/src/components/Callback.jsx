@@ -7,7 +7,7 @@ export default function Callback() {
   const { setToken } = useAuth();
 
   useEffect(() => {
-    const fullHash = window.location.hash;  // Get the full hash part of the URL
+    const fullHash = window.location.hash;
     console.log('Full URL hash:', fullHash);
 
     let token = null;
@@ -25,13 +25,14 @@ export default function Callback() {
       window.localStorage.setItem('token', token);  // Store the token in localStorage
       setToken(token);  // Set the token in your auth context
 
-      // Check if we're on GitHub Pages and include 'spotify-profile-overview' in the path
-      const redirectPath = window.location.hostname === 'andyrohdev.github.io'
-        ? '/spotify-profile-overview/#/'
-        : '/';
-
-      // Redirect back to the main page after token retrieval
-      navigate(redirectPath);
+      // Check if the path already contains 'spotify-profile-overview'
+      if (window.location.pathname.includes('spotify-profile-overview')) {
+        // Redirect back to the main page without appending the subdirectory again
+        navigate('/spotify-profile-overview/#/');
+      } else {
+        // Redirect to the root if on localhost or incorrect path
+        navigate('/');
+      }
     } else {
       console.error('No access token found in the URL');
     }

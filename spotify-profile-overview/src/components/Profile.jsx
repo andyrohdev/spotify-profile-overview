@@ -9,7 +9,6 @@ export default function Profile() {
   const [topArtists, setTopArtists] = useState([]);
   const [topTracks, setTopTracks] = useState([]);
   const [profileData, setProfileData] = useState(null);
-  const [playlistsCount, setPlaylistsCount] = useState(0);  // Add state for playlists count
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -21,7 +20,7 @@ export default function Profile() {
     };
 
     const fetchTopArtists = async () => {
-      const response = await fetch('https://api.spotify.com/v1/me/top/artists?limit=10', {
+      const response = await fetch('https://api.spotify.com/v1/me/top/artists?limit=10&time_range=long_term', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -29,34 +28,17 @@ export default function Profile() {
     };
 
     const fetchTopTracks = async () => {
-      const response = await fetch('https://api.spotify.com/v1/me/top/tracks?limit=10', {
+      const response = await fetch('https://api.spotify.com/v1/me/top/tracks?limit=10&time_range=long_term', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
       setTopTracks(data.items || []);
     };
 
-    const fetchPlaylistsCount = async () => {
-      let totalPlaylists = 0;
-      let nextUrl = 'https://api.spotify.com/v1/me/playlists?limit=50';  // Fetch in batches
-
-      while (nextUrl) {
-        const response = await fetch(nextUrl, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        const data = await response.json();
-        totalPlaylists += data.items.length;
-        nextUrl = data.next;  // Keep fetching if there are more playlists
-      }
-
-      setPlaylistsCount(totalPlaylists);  // Set the total count including public and private playlists
-    };
-
     if (token) {
       fetchProfileData();
       fetchTopArtists();
       fetchTopTracks();
-      fetchPlaylistsCount();  // Fetch the correct playlists count
     }
   }, [token]);
 
@@ -78,11 +60,11 @@ export default function Profile() {
                 <span>Followers</span>
               </div>
               <div className="stat-item">
-                <p>20</p> {/* Fixed following to the correct number */}
+                <p>20</p>
                 <span>Following</span>
               </div>
               <div className="stat-item">
-                <p>{playlistsCount}</p> {/* Dynamically set the playlists count */}
+                <p>90</p>
                 <span>Playlists</span>
               </div>
             </div>

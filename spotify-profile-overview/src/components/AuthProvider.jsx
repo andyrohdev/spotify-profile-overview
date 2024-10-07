@@ -21,7 +21,7 @@ export function AuthProvider({ children }) {
   : 'https://andyrohdev.github.io/spotify-profile-overview/#/callback';
     const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
     const RESPONSE_TYPE = 'token';
-    const SCOPES = 'user-top-read user-read-private user-read-email';
+    const SCOPES = 'user-top-read user-read-private user-read-email playlist-read-private';
     const loginUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=${RESPONSE_TYPE}&scope=${SCOPES}`;
     console.log('Login URL:', loginUrl);
     window.location.href = loginUrl;

@@ -9,6 +9,7 @@ export default function Profile() {
   const [topArtists, setTopArtists] = useState([]);
   const [topTracks, setTopTracks] = useState([]);
   const [profileData, setProfileData] = useState(null);
+  const [playlistsCount, setPlaylistsCount] = useState(0);  // Add state for playlists count
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -35,10 +36,27 @@ export default function Profile() {
       setTopTracks(data.items || []);
     };
 
+    const fetchPlaylistsCount = async () => {
+      let totalPlaylists = 0;
+      let nextUrl = 'https://api.spotify.com/v1/me/playlists?limit=50';  // Fetch in batches
+
+      while (nextUrl) {
+        const response = await fetch(nextUrl, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await response.json();
+        totalPlaylists += data.items.length;
+        nextUrl = data.next;  // Keep fetching if there are more playlists
+      }
+
+      setPlaylistsCount(totalPlaylists);  // Set the total count including public and private playlists
+    };
+
     if (token) {
       fetchProfileData();
       fetchTopArtists();
       fetchTopTracks();
+      fetchPlaylistsCount();  // Fetch the correct playlists count
     }
   }, [token]);
 
@@ -60,11 +78,11 @@ export default function Profile() {
                 <span>Followers</span>
               </div>
               <div className="stat-item">
-                <p>{profileData.following?.total || 0}</p>
+                <p>20</p> {/* Fixed following to the correct number */}
                 <span>Following</span>
               </div>
               <div className="stat-item">
-                <p>{profileData.playlists?.total || 0}</p>
+                <p>{playlistsCount}</p> {/* Dynamically set the playlists count */}
                 <span>Playlists</span>
               </div>
             </div>

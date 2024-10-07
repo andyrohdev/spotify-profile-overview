@@ -12,10 +12,9 @@ export default function App() {
   useEffect(() => {
     const hash = window.location.hash;
 
-    // Check if the URL contains the access token but doesn't have /callback
+    // Only redirect if the URL contains the access token and does NOT include /callback AND you're not already on the callback route
     if (hash.includes('access_token') && !window.location.href.includes('/callback')) {
-      // Append the current hash (containing the token) to /callback
-      const newUrl = `${window.location.origin}/#/callback${hash}`;
+      const newUrl = `${window.location.origin}/spotify-profile-overview/#/callback${hash}`;
       console.log('Redirecting to:', newUrl);
       window.location.assign(newUrl);  // Redirect while keeping the token in the hash
     }
@@ -29,7 +28,7 @@ export default function App() {
       // If there's a token and the user is not already logged in, redirect to home
       console.log('Token found. Redirecting to profile...');
       window.localStorage.setItem('isLoggedIn', 'true');  // Mark user as logged in
-      window.location.assign('/#/');  // Redirect to home page
+      window.location.assign('/spotify-profile-overview/#/');  // Redirect to home page
     }
   }, [token]);
 

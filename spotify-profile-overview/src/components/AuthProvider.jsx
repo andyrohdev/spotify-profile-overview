@@ -23,8 +23,8 @@ export function AuthProvider({ children }) {
     const RESPONSE_TYPE = 'token';
     const SCOPES = 'user-read-private user-read-email user-top-read playlist-read-private playlist-read-collaborative';
 
-    // Add show_dialog=true to force reauthorization prompt
-    const loginUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPES)}&show_dialog=true`;
+    // Add &show_dialog=true to force reauthorization prompt
+    const loginUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPES)}`;
 
     window.location.href = loginUrl;
   };

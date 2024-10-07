@@ -12,7 +12,7 @@
   /* Profile header */
   .profile-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
   
   .profile-picture {
@@ -20,25 +20,30 @@
     height: 150px;
     border-radius: 50%;
     margin-bottom: 20px;
-    object-fit: cover;  /* This ensures the image maintains aspect ratio without being stretched */
-    image-rendering: -webkit-optimize-contrast; /* Enhances image rendering */
-    image-rendering: crisp-edges; /* Make image rendering clearer where possible */
+    object-fit: cover;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
   }
   
+  /* Bold profile name */
   .profile-name {
     font-size: 48px;
     font-weight: bold;
     color: #fff;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
   }
   
+  /* Profile stats */
   .profile-stats {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 20px;
     color: #1db954;
-    margin-top: 10px;
+    margin-top: 5px;
+    letter-spacing: 0.05em;
   }
-
+  
   .stat-item p {
     font-size: 24px;
     font-weight: bold;
@@ -53,14 +58,20 @@
   
   /* Log Out Button */
   .logout-button {
-    background-color: #1db954;
+    background-color: transparent;
     color: white;
-    border: none;
-    padding: 10px 20px;
+    border: 1px solid white;  /* Reduced border width */
+    padding: 12px 25px;
     border-radius: 50px;
     cursor: pointer;
     margin-top: 20px;
     font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .logout-button:hover {
+    background-color: white;
+    color: black;
   }
   
   /* Profile Content */
@@ -68,17 +79,28 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    gap: 50px;
   }
   
   .section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+  }
+  
+  /* Bold section titles */
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
   }
   
   .top-artists, .top-tracks {
     width: 48%;
+    margin-bottom: 30px;
   }
   
   .artist-list, .track-list {
@@ -87,37 +109,57 @@
     gap: 10px;
   }
   
+  /* See More Button */
   .see-more-button {
-    padding: 8px 16px;
-    background-color: #1db954;
+    padding: 12px 25px;
+    background-color: transparent;
     color: white;
-    border: none;
+    border: 1px solid white;  /* Reduced border width */
     border-radius: 50px;
     cursor: pointer;
     text-transform: uppercase;
     font-size: 14px;
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
-
+  
   .see-more-button:hover {
-    background-color: #1ed760;
+    background-color: white;
+    color: black;
   }
-
+  
   .logout-button:hover {
-    background-color: #1ed760;
+    background-color: white;
+    color: black;
   }
-
+  
   /* Adjust width for larger screens */
   @media screen and (min-width: 1024px) {
     .profile-content {
       justify-content: space-evenly;
     }
   }
-
-  /* Fade-in effect for buttons */
-  .profile-container:hover .see-more-button, 
-  .profile-container:hover .logout-button {
-    opacity: 1;
-    transform: translateY(0);
+  
+  /* Mobile-specific styles */
+  @media screen and (max-width: 768px) {
+    .profile-content {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+  
+    .top-artists, .top-tracks {
+      width: 100%;
+    }
+  
+    .artist-list, .track-list {
+      width: 100%;
+    }
+  
+    /* Show only top 5 artists/tracks on mobile */
+    .artist-list div:nth-child(n+6),
+    .track-list div:nth-child(n+6) {
+      display: none;
+    }
   }
+  

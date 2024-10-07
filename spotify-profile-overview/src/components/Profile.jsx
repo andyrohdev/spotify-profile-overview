@@ -9,6 +9,7 @@ export default function Profile() {
   const [topArtists, setTopArtists] = useState([]);
   const [topTracks, setTopTracks] = useState([]);
   const [profileData, setProfileData] = useState(null);
+  const [playlistCount, setPlaylistCount] = useState(0);  // State to hold the correct playlist count
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -90,10 +91,37 @@ export default function Profile() {
       }
     };
 
+    const fetchPlaylists = async () => {
+      try {
+        const response = await fetch('https://api.spotify.com/v1/me/playlists?limit=50', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (response.status === 401) {
+          setError('Unauthorized. Please log in again.');
+          logout();
+          return;
+        }
+
+        if (response.status === 403) {
+          setError('Access forbidden. Please reauthorize the app.');
+          logout();
+          return;
+        }
+
+        const data = await response.json();
+        setPlaylistCount(data.total);  // Set the correct playlist count
+      } catch (err) {
+        console.error('Error fetching playlists:', err);
+        setError('Failed to load playlist data.');
+      }
+    };
+
     if (token) {
       fetchProfileData();
       fetchTopArtists();
       fetchTopTracks();
+      fetchPlaylists();  // Fetch the user's playlists
     }
   }, [token, logout]);
 
@@ -123,7 +151,7 @@ export default function Profile() {
                 <span>Following</span>
               </div>
               <div className="stat-item">
-                <p>90</p>
+                <p>{playlistCount}</p>  {/* Display the correct playlist count */}
                 <span>Playlists</span>
               </div>
             </div>

@@ -7,31 +7,20 @@ export default function Callback() {
   const { setToken } = useAuth();
 
   useEffect(() => {
-    console.log('Callback component mounted');
-
-    let hash = window.location.hash;  // Get the hash part of the URL
+    const hash = window.location.hash;  // Get the hash part of the URL
     console.log('Full URL hash:', hash);
 
-    // Directly extract the access token from the current URL structure
     if (hash.includes('access_token=')) {
       const tokenStartIndex = hash.indexOf('access_token=') + 'access_token='.length;
       const tokenEndIndex = hash.indexOf('&', tokenStartIndex);  // End at the first '&'
-      const token = hash.substring(tokenStartIndex, tokenEndIndex);  // Extract the token
-
-      console.log('Extracted access token:', token);
+      const token = hash.substring(tokenStartIndex, tokenEndIndex);
 
       if (token) {
         window.localStorage.setItem('token', token);  // Store the token in localStorage
         setToken(token);  // Set the token in your auth context
 
-        // Detect if running on GitHub Pages or localhost
-        if (window.location.hostname === 'localhost') {
-          // Redirect to localhost root
-          navigate('/');
-        } else {
-          // Redirect to GitHub Pages project sub-directory
-          navigate('/spotify-profile-overview');
-        }
+        // Redirect back to the home page after token retrieval
+        navigate('/');
       } else {
         console.error('No access token found in the URL');
       }

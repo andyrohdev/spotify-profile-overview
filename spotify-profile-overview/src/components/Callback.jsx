@@ -9,33 +9,28 @@ export default function Callback() {
   useEffect(() => {
     console.log('Callback component mounted');
 
-    let url = window.location.href;  // Get the full URL
-    console.log('Full URL:', url);
+    let hash = window.location.hash;  // Use the hash part of the URL
+    console.log('Full URL hash:', hash);
 
-    // Check if the path is missing 'spotify-profile-overview' and inject it manually (without redirecting)
-    if (!url.includes('/spotify-profile-overview')) {
-      const correctedUrl = `${window.location.origin}/spotify-profile-overview${window.location.hash}`;
-      console.log('Temporarily corrected URL for parsing:', correctedUrl);
-      url = correctedUrl;  // Modify the url variable directly
-    }
+    // Directly extract the access token from the current URL structure
+    if (hash.includes('access_token=')) {
+      const tokenStartIndex = hash.indexOf('access_token=') + 'access_token='.length;
+      const tokenEndIndex = hash.indexOf('&', tokenStartIndex);  // End at the first '&'
+      const token = hash.substring(tokenStartIndex, tokenEndIndex);  // Extract the token
 
-    // Manually handle the specific URL structure for GitHub Pages
-    if (url.includes('#/callback#access_token=')) {
-      const tokenStartIndex = url.indexOf('access_token=') + 'access_token='.length;
-      const tokenEndIndex = url.indexOf('&', tokenStartIndex);  // End at the first '&'
-      const token = url.substring(tokenStartIndex, tokenEndIndex);  // Extract the token
-
-      console.log('Manually extracted access token:', token);
+      console.log('Extracted access token:', token);
 
       if (token) {
-        window.localStorage.setItem('token', token);  // Store the token
+        window.localStorage.setItem('token', token);  // Store the token in localStorage
         setToken(token);  // Set the token in your auth context
-        navigate('/');  // Navigate to the main page after login
+
+        // After setting the token, manually redirect to the correct route
+        navigate('/spotify-profile-overview');
       } else {
         console.error('No access token found in the URL');
       }
     } else {
-      console.error('URL structure does not match the expected pattern');
+      console.error('No access token present in the URL');
     }
   }, [setToken, navigate]);
 

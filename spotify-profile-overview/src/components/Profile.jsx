@@ -19,9 +19,14 @@ export default function Profile() {
         });
 
         if (response.status === 401) {
-          // Handle unauthorized error by logging out or reauthorizing
           setError('Unauthorized. Please log in again.');
-          logout();  // Optionally log out the user
+          logout();
+          return;
+        }
+
+        if (response.status === 403) {
+          setError('Access forbidden. Please reauthorize the app.');
+          logout();
           return;
         }
 
@@ -45,6 +50,12 @@ export default function Profile() {
           return;
         }
 
+        if (response.status === 403) {
+          setError('Access forbidden. Please reauthorize the app.');
+          logout();
+          return;
+        }
+
         const data = await response.json();
         setTopArtists(data.items || []);
       } catch (err) {
@@ -61,6 +72,12 @@ export default function Profile() {
 
         if (response.status === 401) {
           setError('Unauthorized. Please log in again.');
+          logout();
+          return;
+        }
+
+        if (response.status === 403) {
+          setError('Access forbidden. Please reauthorize the app.');
           logout();
           return;
         }

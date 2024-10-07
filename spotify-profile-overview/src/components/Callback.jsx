@@ -12,7 +12,15 @@ export default function Callback() {
     let url = window.location.href;  // Get the full URL
     console.log('Full URL:', url);
 
-    // Manually handle the specific URL structure for GitHub Pages
+    // Check if the path is missing 'spotify-profile-overview' and manually add it back
+    if (!url.includes('/spotify-profile-overview')) {
+      const correctedUrl = `${window.location.origin}/spotify-profile-overview${window.location.hash}`;
+      console.log('Corrected URL:', correctedUrl);
+      window.location.replace(correctedUrl);
+      return;  // Stop execution after redirect
+    }
+
+    // Now that the URL is corrected, manually handle the specific URL structure for GitHub Pages
     if (url.includes('#/callback#access_token=')) {
       const tokenStartIndex = url.indexOf('access_token=') + 'access_token='.length;
       const tokenEndIndex = url.indexOf('&', tokenStartIndex);  // End at the first '&'

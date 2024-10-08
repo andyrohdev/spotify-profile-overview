@@ -10,6 +10,7 @@ export default function Profile() {
   const [topTracks, setTopTracks] = useState([]);
   const [profileData, setProfileData] = useState(null);
   const [playlistCount, setPlaylistCount] = useState(0);  // State to hold the correct playlist count
+  const [followingCount, setFollowingCount] = useState(0); // Dynamic following count
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -19,13 +20,7 @@ export default function Profile() {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        if (response.status === 401) {
-          setError('Unauthorized. Please log in again.');
-          logout();
-          return;
-        }
-
-        if (response.status === 403) {
+        if (response.status === 401 || response.status === 403) {
           setError('Access forbidden. Please reauthorize the app.');
           logout();
           return;
@@ -45,13 +40,7 @@ export default function Profile() {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        if (response.status === 401) {
-          setError('Unauthorized. Please log in again.');
-          logout();
-          return;
-        }
-
-        if (response.status === 403) {
+        if (response.status === 401 || response.status === 403) {
           setError('Access forbidden. Please reauthorize the app.');
           logout();
           return;
@@ -71,13 +60,7 @@ export default function Profile() {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        if (response.status === 401) {
-          setError('Unauthorized. Please log in again.');
-          logout();
-          return;
-        }
-
-        if (response.status === 403) {
+        if (response.status === 401 || response.status === 403) {
           setError('Access forbidden. Please reauthorize the app.');
           logout();
           return;
@@ -97,13 +80,7 @@ export default function Profile() {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        if (response.status === 401) {
-          setError('Unauthorized. Please log in again.');
-          logout();
-          return;
-        }
-
-        if (response.status === 403) {
+        if (response.status === 401 || response.status === 403) {
           setError('Access forbidden. Please reauthorize the app.');
           logout();
           return;
@@ -117,11 +94,32 @@ export default function Profile() {
       }
     };
 
+    const fetchFollowingCount = async () => {
+      try {
+        const response = await fetch('https://api.spotify.com/v1/me/following?type=artist', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (response.status === 401 || response.status === 403) {
+          setError('Access forbidden. Please reauthorize the app.');
+          logout();
+          return;
+        }
+
+        const data = await response.json();
+        setFollowingCount(data.artists?.total || 0);  // Set the correct following count
+      } catch (err) {
+        console.error('Error fetching following count:', err);
+        setError('Failed to load following data.');
+      }
+    };
+
     if (token) {
       fetchProfileData();
       fetchTopArtists();
       fetchTopTracks();
       fetchPlaylists();  // Fetch the user's playlists
+      fetchFollowingCount();  // Fetch the correct following count
     }
   }, [token, logout]);
 
@@ -147,7 +145,7 @@ export default function Profile() {
                 <span>Followers</span>
               </div>
               <div className="stat-item">
-                <p>20</p>
+                <p>{followingCount}</p>  {/* Display the correct following count */}
                 <span>Following</span>
               </div>
               <div className="stat-item">

@@ -1,0 +1,106 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #000;
+    width: 80px;
+    height: 100vh;
+    padding: 20px 0;
+  }
+  
+  .logo-container {
+    margin-bottom: 30px;
+  }
+  
+  .logo {
+    color: #1db954;
+    font-size: 40px;
+  }
+  
+  .sidebar-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .sidebar-links a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #b3b3b3;
+    margin-bottom: 20px;
+    width: 100%;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  
+  .sidebar-links a .text {
+    font-size: 12px; /* Reduced text size */
+  }
+  
+  .sidebar-links a:hover,
+  .sidebar-links a.active {
+    color: white;
+  }
+  
+  /* Animation for green highlight */
+  .sidebar-links a.active::before,
+  .sidebar-links a:hover::before {
+    content: '';
+    width: 5px;
+    height: 100%;
+    background-color: #1db954;
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: slideIn 0.3s ease; /* Add animation */
+  }
+  
+  @keyframes slideIn {
+    from {
+      width: 0;
+    }
+    to {
+      width: 5px;
+    }
+  }
+  
+  .sidebar-links .icon {
+    font-size: 22px; /* Slightly reduced icon size */
+    margin-bottom: 5px;
+  }
+  
+  .sidebar-bottom {
+    margin-top: auto;
+  }
+  
+  .sidebar-bottom a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #b3b3b3;
+    margin-bottom: 20px;
+    transition: color 0.3s;
+  }
+  
+  .sidebar-bottom a:hover {
+    color: white;
+  }
+  
+  .sidebar-bottom .icon {
+    font-size: 30px; /* Adjusted icon size */
+    margin-bottom: 5px;
+  }
+  
+  .sidebar-bottom .portfolio-label {
+    font-size: 14px; /* Label for portfolio */
+    color: #b3b3b3;
+  }
+  
+  .sidebar-bottom a:hover .portfolio-label {
+    color: white;
+  }
+  

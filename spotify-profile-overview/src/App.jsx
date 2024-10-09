@@ -5,6 +5,8 @@ import Profile from './components/Profile';
 import NotFound from './components/NotFound';
 import Callback from './components/Callback';
 import LandingPage from './components/LandingPage';
+import Sidebar from './components/Sidebar';  // Import the Sidebar component
+import './App.css';  // Make sure to have basic CSS styles if necessary
 
 export default function App() {
   const { token } = useAuth();
@@ -17,7 +19,6 @@ export default function App() {
 
     // Only redirect if the URL contains the access token and does NOT include /callback AND you're not already on the callback route
     if (hash.includes('access_token') && !window.location.href.includes('/callback')) {
-      // Set the correct redirect URL based on the environment (localhost or GitHub Pages)
       const newUrl = isLocalhost
         ? `${window.location.origin}/#/callback${hash}`  // No subdirectory for localhost
         : `${window.location.origin}/spotify-profile-overview/#/callback${hash}`;  // Use subdirectory for GitHub Pages
@@ -37,7 +38,6 @@ export default function App() {
       console.log('Token found. Redirecting to profile...');
       window.localStorage.setItem('isLoggedIn', 'true');  // Mark user as logged in
       
-      // Set the correct home redirect URL based on the environment
       const homeUrl = isLocalhost
         ? '/#/'  // No subdirectory for localhost
         : '/spotify-profile-overview/#/';  // Use subdirectory for GitHub Pages
@@ -48,14 +48,22 @@ export default function App() {
 
   return (
     <Router>
-      <Routes>
-        <Route 
-          path="/" 
-          element={token ? <Profile /> : <LandingPage />} 
-        />
-        <Route path="/callback" element={<Callback />} />
-        <Route path="*" element={<NotFound />} />  {/* Fallback route for unmatched paths */}
-      </Routes>
+      <div className="app-container">
+        {/* Sidebar is rendered for all pages */}
+        <Sidebar />
+
+        {/* Main content changes based on routes */}
+        <div className="main-content">
+          <Routes>
+            <Route 
+              path="/" 
+              element={token ? <Profile /> : <LandingPage />} 
+            />
+            <Route path="/callback" element={<Callback />} />
+            <Route path="*" element={<NotFound />} />  {/* Fallback route for unmatched paths */}
+          </Routes>
+        </div>
+      </div>
     </Router>
   );
 }

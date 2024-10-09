@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from './AuthProvider';
+import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 import ArtistCard from './ArtistCard';
 import TrackCard from './TrackCard';
 import './Profile.css';  // Import the CSS file for styling
@@ -138,7 +139,14 @@ export default function Profile() {
               alt={profileData.display_name}
               className="profile-picture"
             />
-            <h1 className="profile-name">{profileData.display_name}</h1>
+            <a 
+              href={profileData.external_urls.spotify} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="profile-name-link"
+            >
+              <h1 className="profile-name">{profileData.display_name}</h1>
+            </a>
             <div className="profile-stats">
               <div className="stat-item">
                 <p>{profileData.followers?.total || 0}</p>
@@ -163,7 +171,7 @@ export default function Profile() {
             <div className="top-artists">
               <div className="section-header">
                 <h2>Top Artists of All Time</h2>
-                <button className="see-more-button">SEE MORE</button>
+                <Link to="/artists" className="see-more-button">SEE MORE</Link> {/* Redirect to artists */}
               </div>
               <div className="artist-list">
                 {topArtists.length > 0 ? (
@@ -179,7 +187,7 @@ export default function Profile() {
             <div className="top-tracks">
               <div className="section-header">
                 <h2>Top Tracks of All Time</h2>
-                <button className="see-more-button">SEE MORE</button>
+                <Link to="/tracks" className="see-more-button">SEE MORE</Link> {/* Redirect to tracks */}
               </div>
               <div className="track-list">
                 {topTracks.length > 0 ? (

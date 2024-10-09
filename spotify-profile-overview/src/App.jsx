@@ -48,9 +48,9 @@ export default function App() {
 
   return (
     <Router>
-      <div className="app-container">
-        {/* Sidebar is rendered for all pages */}
-        <Sidebar />
+      <div className={`app-container ${token ? '' : 'no-sidebar'}`}>
+        {/* Conditionally render Sidebar only if token is available */}
+        {token && <Sidebar />}
 
         {/* Main content changes based on routes */}
         <div className="main-content">

@@ -1,106 +1,173 @@
 .sidebar {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #000;
+  width: 100px; /* Increased width for desktop */
+  height: 100vh;
+  padding: 20px 0;
+  overflow-y: auto;
+  position: fixed; /* Keep sidebar fixed */
+  top: 0;
+  left: 0;
+}
+
+.logo-container {
+  margin-bottom: 30px;
+}
+
+.logo {
+  color: #1db954;
+  font-size: 40px;
+}
+
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.sidebar-links a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #b3b3b3;
+  margin-bottom: 20px;
+  width: 100%;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.sidebar-links a .text {
+  font-size: 10px; /* Reduced text size */
+}
+
+.sidebar-links a:hover,
+.sidebar-links a.active {
+  color: white;
+}
+
+/* Animation for green highlight */
+.sidebar-links a.active::before,
+.sidebar-links a:hover::before {
+  content: '';
+  width: 5px;
+  height: 100%;
+  background-color: #1db954;
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    width: 0;
+  }
+  to {
+    width: 5px;
+  }
+}
+
+.sidebar-links .icon {
+  font-size: 26px; /* Increased icon size for consistency */
+  margin-bottom: 5px;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar-bottom a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #b3b3b3;
+  margin-bottom: 20px;
+  transition: color 0.3s;
+}
+
+.sidebar-bottom a:hover {
+  color: white;
+}
+
+.github-icon {
+  font-size: 28px; /* Adjusted GitHub icon size */
+  transition: color 0.3s ease;
+}
+
+.github-icon:hover {
+  color: #1db954; /* Green color on hover */
+}
+
+.portfolio-label {
+  font-size: 14px; /* Label for portfolio */
+  color: #b3b3b3;
+}
+
+.sidebar-bottom a:hover .portfolio-label {
+  color: white;
+}
+
+/* Prevent horizontal scrolling in the main container */
+body, html, .main-content {
+  overflow-x: hidden;
+}
+
+/* Media query for mobile screens */
+@media (max-width: 768px) {
+  .sidebar {
+    flex-direction: row; /* Change the sidebar to row */
+    justify-content: space-around; /* Distribute items evenly */
     align-items: center;
-    background-color: #000;
-    width: 80px;
-    height: 100vh;
-    padding: 20px 0;
+    width: 100%; /* Take up full width of the screen */
+    height: 60px; /* Adjust height to fit mobile style */
+    bottom: 0; /* Position it at the bottom of the viewport */
+    top: auto; /* Remove top alignment */
+    left: 0;
+    right: 0;
+    padding: 0;
+    position: fixed; /* Fixed position at bottom */
   }
-  
-  .logo-container {
-    margin-bottom: 30px;
+
+  /* Hide the Spotify logo, portfolio, and GitHub only on mobile */
+  .logo-container,
+  .sidebar-bottom {
+    display: none;
   }
-  
-  .logo {
-    color: #1db954;
-    font-size: 40px;
-  }
-  
+
   .sidebar-links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row; /* Make the sidebar links row-based */
+    justify-content: space-around;
     width: 100%;
   }
-  
+
   .sidebar-links a {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: #b3b3b3;
-    margin-bottom: 20px;
-    width: 100%;
-    position: relative;
-    transition: color 0.3s ease;
+    margin-bottom: 0;
   }
-  
-  .sidebar-links a .text {
-    font-size: 12px; /* Reduced text size */
-  }
-  
-  .sidebar-links a:hover,
-  .sidebar-links a.active {
-    color: white;
-  }
-  
-  /* Animation for green highlight */
+
+  /* Move green highlight to the top of buttons */
   .sidebar-links a.active::before,
   .sidebar-links a:hover::before {
     content: '';
-    width: 5px;
-    height: 100%;
+    width: 100%; /* Full width of the button */
+    height: 5px; /* Smaller height */
     background-color: #1db954;
     position: absolute;
+    top: 0; /* Position at the top of the button */
     left: 0;
-    top: 0;
-    animation: slideIn 0.3s ease; /* Add animation */
   }
-  
-  @keyframes slideIn {
-    from {
-      width: 0;
-    }
-    to {
-      width: 5px;
-    }
-  }
-  
-  .sidebar-links .icon {
-    font-size: 22px; /* Slightly reduced icon size */
-    margin-bottom: 5px;
-  }
-  
+
   .sidebar-bottom {
-    margin-top: auto;
+    flex-direction: row;
+    margin-top: 0;
+    justify-content: center;
   }
-  
-  .sidebar-bottom a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: #b3b3b3;
-    margin-bottom: 20px;
-    transition: color 0.3s;
-  }
-  
-  .sidebar-bottom a:hover {
-    color: white;
-  }
-  
-  .sidebar-bottom .icon {
-    font-size: 30px; /* Adjusted icon size */
-    margin-bottom: 5px;
-  }
-  
-  .sidebar-bottom .portfolio-label {
-    font-size: 14px; /* Label for portfolio */
-    color: #b3b3b3;
-  }
-  
-  .sidebar-bottom a:hover .portfolio-label {
-    color: white;
-  }
-  
+}

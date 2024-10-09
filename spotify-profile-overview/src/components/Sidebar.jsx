@@ -20,37 +20,36 @@ export default function Sidebar() {
       <div className="sidebar-links">
         <Link to="/" className={location.pathname === '/' ? 'active' : ''}>
           <MdPerson className="icon" />
-          <span>Profile</span>
+          <span className="text">Profile</span>
         </Link>
         <Link to="/tracks" className={location.pathname === '/tracks' ? 'active' : ''}>
           <MdMusicNote className="icon" />
-          <span>Top Tracks</span>
+          <span className="text">Top Tracks</span>
         </Link>
         <Link to="/artists" className={location.pathname === '/artists' ? 'active' : ''}>
           <MdLibraryMusic className="icon" />
-          <span>Top Artists</span>
+          <span className="text">Top Artists</span>
         </Link>
         <Link to="/recent" className={location.pathname === '/recent' ? 'active' : ''}>
           <MdHistory className="icon" />
-          <span>Recent</span>
+          <span className="text">Recent</span>
         </Link>
         <Link to="/playlists" className={location.pathname === '/playlists' ? 'active' : ''}>
           <MdPlaylistPlay className="icon" />
-          <span>Playlists</span>
+          <span className="text">Playlists</span>
         </Link>
       </div>
 
       {/* Portfolio and GitHub Links */}
       <div className="sidebar-bottom">
-  <a href="https://andyrohdev.github.io/portfolio-website/" target="_blank" rel="noopener noreferrer">
-    <MdPerson className="portfolio-icon" />
-    <span className="portfolio-label">Portfolio</span>
-  </a>
-  <a href="https://github.com/andyrohdev" target="_blank" rel="noopener noreferrer">
-    <FaGithub className="github-icon" />
-  </a>
-</div>
-
+        <a href="https://andyrohdev.github.io/portfolio-website/" target="_blank" rel="noopener noreferrer">
+          <MdPerson className="portfolio-icon" />
+          <span className="portfolio-label">Portfolio</span>
+        </a>
+        <a href="https://github.com/andyrohdev/spotify-profile-overview" target="_blank" rel="noopener noreferrer">
+          <FaGithub className="github-icon" />
+        </a>
+      </div>
     </div>
   );
 }

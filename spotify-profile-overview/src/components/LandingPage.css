@@ -1,0 +1,45 @@
+/* Styles for the landing page */
+.landing-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #121212;
+  z-index: 1000;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.landing-page h1 {
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.landing-page button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #1DB954;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.landing-page button:hover {
+  background-color: #1ed760;
+}

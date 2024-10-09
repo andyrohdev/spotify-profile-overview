@@ -1,0 +1,172 @@
+.top-tracks-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #121212;
+  }
+  
+  .top-tracks-container .time-period-filter {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px; /* Increased margin to move podium further down */
+  }
+  
+  .top-tracks-container .time-period-filter span {
+    font-size: 18px;
+    margin: 0 15px;
+    cursor: pointer;
+    color: #b3b3b3;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+  }
+  
+  .top-tracks-container .time-period-filter span.active {
+    color: #1db954; /* Spotify green */
+    border-bottom-color: #1db954;
+  }
+  
+  /* Podium for the top 3 tracks */
+  .podium {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 60px;
+    position: relative;
+  }
+  
+  .podium .track-podium {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .podium .track-podium img {
+    border-radius: 8px; /* Rounded square */
+    transition: transform 0.3s ease;
+  }
+  
+  .podium .track-podium h3 {
+    text-align: center;
+    margin-top: 10px;
+    color: #fff;
+  }
+  
+  /* Ensure the top 1 track is visibly larger */
+  .podium .first-place {
+    order: 1;
+  }
+  
+  .podium .first-place img {
+    width: 200px; /* Top 1 track is larger */
+    height: 200px;
+  }
+  
+  .podium .second-place {
+    order: 0;
+  }
+  
+  .podium .third-place {
+    order: 2;
+  }
+  
+  .podium .second-place img,
+  .podium .third-place img {
+    width: 150px; /* Secondary tracks are smaller */
+    height: 150px;
+  }
+  
+  /* Hover effect: scale up slightly */
+  .podium .track-podium:hover img {
+    transform: scale(1.1);
+  }
+  
+  /* Top 50 Tracks */
+  .top-50-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .top-50-list li {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #333;
+  }
+  
+  .track-position {
+    font-size: 20px;
+    color: #b3b3b3;
+    margin-right: 20px;
+  }
+  
+  .track-card {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+  
+  /* Ensure the layout is more consistent across pages */
+  .track-card img {
+    border-radius: 8px;
+    max-width: 60px;
+  }
+  
+  /* Responsive adjustments for mobile */
+  @media (max-width: 768px) {
+    .podium {
+      flex-direction: row; /* Ensure the podium remains horizontal */
+      gap: 20px;
+    }
+  
+    .podium .track-podium img {
+      width: 120px;
+      height: 120px;
+    }
+  
+    .first-place img {
+      width: 140px;
+      height: 140px;
+    }
+  
+    /* Top 50 list adjustments for mobile */
+    .top-50-list li {
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+    }
+  
+    .track-card {
+      width: 100%;
+      margin-right: 10px;
+    }
+  
+    .track-position {
+      margin-bottom: 0;
+      font-size: 18px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .podium .track-podium img {
+      width: 100px;
+      height: 100px;
+    }
+  
+    .first-place img {
+      width: 120px;
+      height: 120px;
+    }
+  
+    .track-position {
+      font-size: 16px;
+    }
+  }
+  

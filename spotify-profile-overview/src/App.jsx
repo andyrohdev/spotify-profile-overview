@@ -7,6 +7,7 @@ import Callback from './components/Callback';
 import LandingPage from './components/LandingPage';
 import Sidebar from './components/Sidebar';
 import TopArtists from './components/TopArtists';  // Import the TopArtists component
+import TopTracks from './components/TopTracks';    // Import the TopTracks component
 import './App.css';
 
 export default function App() {
@@ -49,7 +50,8 @@ export default function App() {
         <div className="main-content">
           <Routes>
             <Route path="/" element={token ? <Profile /> : <LandingPage />} />
-            <Route path="/artists" element={token ? <TopArtists /> : <LandingPage />} /> {/* New route for TopArtists */}
+            <Route path="/artists" element={token ? <TopArtists /> : <LandingPage />} /> {/* Route for TopArtists */}
+            <Route path="/tracks" element={token ? <TopTracks /> : <LandingPage />} />   {/* New route for TopTracks */}
             <Route path="/callback" element={<Callback />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

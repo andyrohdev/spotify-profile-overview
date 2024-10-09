@@ -20,11 +20,11 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  margin-bottom: 15px;  /* Reduce gap between profile picture and profile name */
+  margin-bottom: 15px;
   object-fit: cover;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
+  image-rendering: auto; /* This will make the browser use the most appropriate rendering algorithm */
 }
+
 
 /* Bold profile name */
 .profile-name {

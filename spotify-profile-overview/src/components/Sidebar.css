@@ -1,15 +1,17 @@
+/* Sidebar layout */
 .sidebar {
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #000;
-  width: 100px; /* Increased width for desktop */
+  width: 100px; /* Sidebar width for desktop */
   height: 100vh;
   padding: 20px 0;
-  overflow-y: auto;
+  overflow-y: auto; /* Allow the sidebar to scroll if needed */
   position: fixed; /* Keep sidebar fixed */
   top: 0;
   left: 0;
+  z-index: 1000; /* Ensure it stays on top */
 }
 
 .logo-container {
@@ -21,6 +23,7 @@
   font-size: 40px;
 }
 
+/* Sidebar links */
 .sidebar-links {
   display: flex;
   flex-direction: column;
@@ -49,7 +52,7 @@
   color: white;
 }
 
-/* Animation for green highlight */
+/* Desktop animation for green highlight */
 .sidebar-links a.active::before,
 .sidebar-links a:hover::before {
   content: '';
@@ -59,15 +62,31 @@
   position: absolute;
   left: 0;
   top: 0;
-  animation: slideIn 0.3s ease;
+  animation: slideInDesktop 0.3s ease forwards;
 }
 
-@keyframes slideIn {
+/* Slide-out animation for non-active and non-hovered */
+.sidebar-links a:not(.active):not(:hover)::before {
+  animation: slideOutDesktop 0.3s ease forwards;
+}
+
+/* Slide-in animation for active and hover */
+@keyframes slideInDesktop {
   from {
-    width: 0;
+    height: 0;
   }
   to {
-    width: 5px;
+    height: 100%;
+  }
+}
+
+/* Slide-out animation */
+@keyframes slideOutDesktop {
+  from {
+    height: 100%;
+  }
+  to {
+    height: 0;
   }
 }
 
@@ -76,11 +95,15 @@
   margin-bottom: 5px;
 }
 
+/* Move Portfolio and GitHub to bottom-left on desktop */
 .sidebar-bottom {
-  margin-top: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: absolute;
+  bottom: 20px; /* Align to bottom */
+  left: 20px; /* Align to the left corner */
+  margin-bottom: 20px;
 }
 
 .sidebar-bottom a {
@@ -115,9 +138,15 @@
   color: white;
 }
 
-/* Prevent horizontal scrolling in the main container */
-body, html, .main-content {
-  overflow-x: hidden;
+/* Prevent horizontal scrolling but allow vertical */
+body, html {
+  overflow-x: hidden; /* Block horizontal scrolling */
+  overflow-y: auto;   /* Allow vertical scrolling */
+}
+
+.main-content {
+  overflow-y: auto; /* Ensure the main content can scroll vertically */
+  margin-left: 100px; /* Ensure space for the sidebar */
 }
 
 /* Media query for mobile screens */
@@ -127,16 +156,16 @@ body, html, .main-content {
     justify-content: space-around; /* Distribute items evenly */
     align-items: center;
     width: 100%; /* Take up full width of the screen */
-    height: 60px; /* Adjust height to fit mobile style */
+    height: 80px; /* Taller sidebar on mobile */
     bottom: 0; /* Position it at the bottom of the viewport */
     top: auto; /* Remove top alignment */
     left: 0;
     right: 0;
     padding: 0;
     position: fixed; /* Fixed position at bottom */
+    z-index: 1000;
   }
 
-  /* Hide the Spotify logo, portfolio, and GitHub only on mobile */
   .logo-container,
   .sidebar-bottom {
     display: none;
@@ -153,21 +182,39 @@ body, html, .main-content {
     margin-bottom: 0;
   }
 
-  /* Move green highlight to the top of buttons */
+  /* Mobile-specific animation for green highlight */
   .sidebar-links a.active::before,
   .sidebar-links a:hover::before {
     content: '';
-    width: 100%; /* Full width of the button */
-    height: 5px; /* Smaller height */
+    height: 5px;
     background-color: #1db954;
     position: absolute;
-    top: 0; /* Position at the top of the button */
     left: 0;
+    top: -17px;
+    width: 100%; /* Full width */
+    animation: slideInMobile 0.3s ease forwards;
   }
 
-  .sidebar-bottom {
-    flex-direction: row;
-    margin-top: 0;
-    justify-content: center;
+  /* Mobile-specific slide-out animation */
+  .sidebar-links a:not(.active):not(:hover)::before {
+    animation: slideOutMobile 0.3s ease forwards;
+  }
+
+  @keyframes slideInMobile {
+    from {
+      height: 0;
+    }
+    to {
+      height: 5px;
+    }
+  }
+
+  @keyframes slideOutMobile {
+    from {
+      height: 5px;
+    }
+    to {
+      height: 0;
+    }
   }
 }

@@ -11,7 +11,7 @@
   .top-tracks-container .time-period-filter {
     display: flex;
     justify-content: center;
-    margin-bottom: 60px; /* Increased margin to move podium further down */
+    margin-bottom: 60px;
   }
   
   .top-tracks-container .time-period-filter span {
@@ -25,7 +25,7 @@
   }
   
   .top-tracks-container .time-period-filter span.active {
-    color: #1db954; /* Spotify green */
+    color: #1db954;
     border-bottom-color: #1db954;
   }
   
@@ -37,6 +37,8 @@
     gap: 40px;
     margin-bottom: 60px;
     position: relative;
+    max-width: 100%;
+    overflow: hidden; /* Prevent overflow with long track names */
   }
   
   .podium .track-podium {
@@ -48,7 +50,7 @@
   }
   
   .podium .track-podium img {
-    border-radius: 8px; /* Rounded square */
+    border-radius: 8px;
     transition: transform 0.3s ease;
   }
   
@@ -56,6 +58,10 @@
     text-align: center;
     margin-top: 10px;
     color: #fff;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   
   /* Ensure the top 1 track is visibly larger */
@@ -64,7 +70,7 @@
   }
   
   .podium .first-place img {
-    width: 200px; /* Top 1 track is larger */
+    width: 200px;
     height: 200px;
   }
   
@@ -78,7 +84,7 @@
   
   .podium .second-place img,
   .podium .third-place img {
-    width: 150px; /* Secondary tracks are smaller */
+    width: 150px;
     height: 150px;
   }
   
@@ -113,16 +119,15 @@
     margin-right: 10px;
   }
   
-  /* Ensure the layout is more consistent across pages */
   .track-card img {
     border-radius: 8px;
     max-width: 60px;
   }
   
-  /* Responsive adjustments for mobile */
+  /* Mobile Adjustments */
   @media (max-width: 768px) {
     .podium {
-      flex-direction: row; /* Ensure the podium remains horizontal */
+      flex-direction: row;
       gap: 20px;
     }
   
@@ -136,7 +141,6 @@
       height: 140px;
     }
   
-    /* Top 50 list adjustments for mobile */
     .top-50-list li {
       flex-direction: row;
       align-items: center;
@@ -149,7 +153,6 @@
     }
   
     .track-position {
-      margin-bottom: 0;
       font-size: 18px;
     }
   }

@@ -37,7 +37,7 @@
 @media screen and (max-width: 768px) {
   .main-content {
       margin-left: 0;  /* Remove margin for mobile to use full screen width */
-      padding: 10px;
+      
   }
 
   .page-container {

@@ -1,0 +1,177 @@
+.top-artists-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #121212;
+}
+
+.top-artists-container .time-period-filter {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60px; /* Increased margin to move podium further down */
+}
+
+.top-artists-container .time-period-filter span {
+  font-size: 18px;
+  margin: 0 15px;
+  cursor: pointer;
+  color: #b3b3b3;
+  padding-bottom: 5px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.top-artists-container .time-period-filter span.active {
+  color: #1db954; /* Spotify green */
+  border-bottom-color: #1db954;
+}
+
+/* Podium for the top 3 artists */
+.podium {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;  /* Adjusted gap to fit better */
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.podium .artist-podium {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.podium .artist-podium img {
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.podium .artist-podium h3 {
+  text-align: center;
+  margin-top: 10px;
+  color: #fff;
+}
+
+/* Ensure the top 1 artist is visibly larger */
+.podium .first-place {
+  order: 1;  /* Ensures this artist is always in the center */
+}
+
+.podium .first-place img {
+  width: 200px; /* Top 1 artist is larger */
+  height: 200px;
+}
+
+.podium .second-place {
+  order: 0;  /* Second artist is positioned to the left */
+}
+
+.podium .third-place {
+  order: 2;  /* Third artist is positioned to the right */
+}
+
+.podium .second-place img,
+.podium .third-place img {
+  width: 150px; /* Secondary artists are smaller */
+  height: 150px;
+}
+
+/* Hover effect: scale up slightly */
+.podium .artist-podium:hover img {
+  transform: scale(1.1);
+}
+
+/* Top 50 Artists */
+.top-50-list {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  max-width: 800px;
+}
+
+.top-50-list li {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #333;
+}
+
+.artist-position {
+  font-size: 20px;
+  color: #b3b3b3;  /* Subtle grey for the numbering */
+  margin-right: 20px;
+}
+
+.artist-card {
+  flex-grow: 1;
+  margin-right: 10px;  /* Added margin-right */
+}
+
+/* Ensure the layout is more consistent across pages */
+.artist-card img {
+  border-radius: 8px;
+  max-width: 60px;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  /* Podium adjustment for smaller screens - REMAINS HORIZONTAL */
+  .podium {
+    flex-direction: row; /* Ensure the podium remains horizontal */
+    gap: 20px; /* Reduce gap to fit better on mobile */
+  }
+
+  .podium .artist-podium img {
+    width: 120px; /* Reduce the size of the images for mobile */
+    height: 120px;
+  }
+
+  .first-place img {
+    width: 140px; /* Slightly larger for the top artist */
+    height: 140px;
+  }
+
+  /* Top 50 list adjustments for mobile */
+  .top-50-list li {
+    flex-direction: row; /* Keep items in row */
+    align-items: center;
+    width: 100%;
+  }
+
+  .artist-card {
+    width: 100%;  /* Make the artist card stretch across the full width */
+    margin-right: 10px; /* Maintain margin-right for consistency */
+  }
+
+  .artist-position {
+    margin-bottom: 0;
+    font-size: 18px;  /* Slightly smaller text for numbers on mobile */
+  }
+
+  .top-50-list li {
+    border-bottom: 1px solid #333;
+    padding: 12px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .podium .artist-podium img {
+    width: 100px; /* Smaller size for very small screens */
+    height: 100px;
+  }
+
+  .first-place img {
+    width: 120px; /* Top 1 artist adjusted for smaller screens */
+    height: 120px;
+  }
+
+  .artist-position {
+    font-size: 16px;  /* Reduce font size for even smaller screens */
+  }
+}

@@ -1,6 +1,6 @@
 /* Profile container */
 .profile-container {
-  max-width: 1000px;  /* Adjust max width for responsiveness */
+  max-width: 1200px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -19,7 +19,7 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  margin-bottom: 20px;
+  margin-bottom: 15px;  /* Reduce gap between profile picture and profile name */
   object-fit: cover;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
@@ -30,8 +30,18 @@
   font-size: 48px;
   font-weight: bold;
   color: #fff;
-  margin-bottom: 10px;
+  margin-bottom: 5px;  /* Reduce space between profile name and stats */
+  margin-top: 10px;  /* Reduce top margin to decrease gap above profile name */
   letter-spacing: 1px;
+}
+
+/* Profile info with centered layout */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;  /* Adds more spacing below the stats and logout button */
 }
 
 /* Profile stats */
@@ -60,13 +70,14 @@
 .logout-button {
   background-color: transparent;
   color: white;
-  border: 1px solid white;  /* Reduced border width */
+  border: 1px solid white;
   padding: 12px 25px;
   border-radius: 50px;
   cursor: pointer;
-  margin-top: 20px;
   font-weight: bold;
   transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: 20px;  /* Adds some space between stats and logout button */
+  margin-bottom: 20px;
 }
 
 .logout-button:hover {
@@ -79,21 +90,30 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  gap: 50px;
-  flex-wrap: wrap;  /* Allow wrapping of content to prevent overflow */
+  gap: 40px;
+  flex-wrap: nowrap;
+  margin-top: 30px;
 }
 
-/* Bold section titles */
+/* Section Header (for alignment of the title and button) */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
 .section-header h2 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   color: white;
-  margin-bottom: 10px;
   letter-spacing: 1px;
+  margin: 0;
 }
 
 .top-artists, .top-tracks {
-  width: 48%;
+  flex-basis: calc(60% - 25px);
   margin-bottom: 30px;
 }
 
@@ -103,18 +123,20 @@
   gap: 10px;
 }
 
-/* See More Button */
+/* See More Button aligned to the right of the section title */
 .see-more-button {
-  padding: 12px 25px;
+  padding: 10px 20px;
   background-color: transparent;
   color: white;
-  border: 1px solid white;  /* Reduced border width */
+  border: 1px solid white;
   border-radius: 50px;
   cursor: pointer;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   transition: background-color 0.3s ease, color 0.3s ease;
+  white-space: nowrap;
+  margin-left: auto;
 }
 
 .see-more-button:hover {
@@ -126,7 +148,7 @@
 @media screen and (min-width: 1024px) {
   .profile-content {
     justify-content: space-evenly;
-    flex-wrap: wrap;  /* Keep wrapping for larger screens */
+    flex-wrap: nowrap;
   }
 }
 

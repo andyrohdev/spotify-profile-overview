@@ -36,9 +36,6 @@ export function AuthProvider({ children }) {
     
     window.location.href = loginUrl;
   };
-  
-
-
 
   const logout = () => {
     window.localStorage.removeItem('token');  // Remove the token

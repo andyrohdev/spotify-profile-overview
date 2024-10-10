@@ -71,19 +71,21 @@
   transition: transform 0.3s ease;
 }
 
-/* Ensure the top 1 artist is visibly larger */
-.artists-podium .first-place img {
+.artists-podium .artist-podium img {
   width: 12vw; /* Dynamic size based on viewport width */
-  height: 13vh;
+  height: 12vw; /* Match the width for circular shape */
+  border-radius: 50%; /* Ensure circular shape */
+  object-fit: cover; /* Ensure the image covers the entire area without distortion */
+  transition: transform 0.3s ease;
 }
 
 .artists-podium .second-place img,
 .artists-podium .third-place img {
-  width: 9vw;
-  height: 10vh;
+  width: 10vw;
+  height: 10vw; /* Match width for circular shape */
+  border-radius: 50%; /* Ensure circular shape */
+  object-fit: cover;
 }
-
-
 
 /* Hover effect: scale up slightly */
 .artists-podium .artist-podium:hover img {
@@ -155,12 +157,16 @@
   }
 
   .artists-podium .first-place img {
-    width: 28vw; /* Increase size for mobile */
+    width: 28vw; /* Larger size for mobile */
+    height: 28vw; /* Match width for circular shape */
+    border-radius: 50%;
   }
 
   .artists-podium .second-place img,
   .artists-podium .third-place img {
-    width: 22vw; /* Increase size for mobile */
+    width: 22vw; /* Smaller size for mobile */
+    height: 22vw; /* Match width for circular shape */
+    border-radius: 50%;
   }
 
   .artists-top-50-list {

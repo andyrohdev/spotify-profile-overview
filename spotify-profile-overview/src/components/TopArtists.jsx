@@ -13,6 +13,10 @@ const TopArtists = () => {
     fetchTopArtists();
   }, [timeRange]);
 
+  useEffect(() => {
+    addMarqueeEffect(); // Run the marquee effect when the artists data changes
+  }, [topArtists]);
+
   const fetchTopArtists = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -37,6 +41,18 @@ const TopArtists = () => {
     if (range === 'Last 4 Weeks') setTimeRange('short_term');
   };
 
+  // Function to add the marquee effect for overflowing text
+  const addMarqueeEffect = () => {
+    const titles = document.querySelectorAll('.artist-podium h3');
+    titles.forEach(title => {
+      if (title.scrollWidth > title.clientWidth) {
+        title.classList.add('marquee');
+      } else {
+        title.classList.remove('marquee');
+      }
+    });
+  };
+
   const top3Artists = topArtists.slice(0, 3);
   const otherArtists = topArtists.slice(3);
 
@@ -58,19 +74,23 @@ const TopArtists = () => {
         <p>No artists to display</p>
       ) : (
         <>
-          <div className="podium">
+          <div className="artists-podium">
             {top3Artists.map((artist, index) => (
               <div
                 key={artist.id}
                 className={`artist-podium ${index === 0 ? 'first-place' : index === 1 ? 'second-place' : 'third-place'}`}
               >
                 <img src={artist.images[0]?.url} alt={artist.name} />
-                <h3>{artist.name}</h3>
+                
+                {/* Wrap title in marquee-wrapper to prevent overflow */}
+                <div className='marquee-wrapper'>
+                  <h3>{artist.name}</h3>
+                </div>
               </div>
             ))}
           </div>
 
-          <ol className="top-50-list">
+          <ol className="artists-top-50-list">
             {otherArtists.map((artist, index) => (
               <li key={artist.id}>
                 <span className="artist-position">{index + 4}</span>

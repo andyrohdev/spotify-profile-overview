@@ -2,11 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 20px 0;
   min-height: 100vh;
   width: 100%;
   background-color: #121212;
 }
+
 
 .top-artists-container .time-period-filter {
   display: flex;
@@ -30,31 +31,71 @@
 }
 
 /* Podium for the top 3 artists */
-.podium {
+.artists-podium {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 40px;
+  align-items: center; /* Center the artists vertically */
   margin-bottom: 60px;
-  position: relative;
   max-width: 100%;
-  overflow: hidden;
+  position: relative;
+  overflow: visible;
+  margin-bottom: 60px;
 }
 
-.podium .artist-podium {
+/* Ensure the top artist is centered and visibly larger */
+.artists-podium .first-place {
+  order: 1; /* Keep the first place in the middle */
+  z-index: 1;
+}
+
+.artists-podium .second-place {
+  order: 0;
+}
+
+.artists-podium .third-place {
+  order: 2;
+}
+
+/* Podium artist styling with rounded corners */
+.artists-podium .artist-podium {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   transition: transform 0.3s ease;
+  position: relative;
 }
 
-.podium .artist-podium img {
-  border-radius: 50%;
+.artists-podium .artist-podium img {
+  border-radius: 50%; /* Rounded corners for the podium artists */
   transition: transform 0.3s ease;
 }
 
-.podium .artist-podium h3 {
+/* Ensure the top 1 artist is visibly larger */
+.artists-podium .first-place img {
+  width: 12vw; /* Dynamic size based on viewport width */
+  height: auto;
+}
+
+.artists-podium .second-place img,
+.artists-podium .third-place img {
+  width: 9vw;
+  height: auto;
+}
+
+
+
+/* Hover effect: scale up slightly */
+.artists-podium .artist-podium:hover img {
+  transform: scale(1.1);
+}
+
+/* Padding for the podium to prevent clipping */
+.artists-podium .artist-podium {
+  margin: 0 2vw; /* Add margin relative to the viewport */
+}
+
+.artists-podium .artist-podium h3 {
   text-align: center;
   margin-top: 10px;
   color: #fff;
@@ -64,72 +105,71 @@
   white-space: nowrap;
 }
 
-/* Ensure the top 1 artist is visibly larger */
-.podium .first-place img {
-  width: 200px;
-  height: 200px;
-}
-
-.podium .second-place img,
-.podium .third-place img {
-  width: 150px;
-  height: 150px;
-}
-
-/* Hover effect: scale up slightly */
-.podium .artist-podium:hover img {
-  transform: scale(1.1);
-}
-
 /* Top 50 Artists */
-.top-50-list {
+.artists-top-50-list {
   list-style: none;
   padding: 0;
   width: 100%;
-  max-width: 800px;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding-left: 20%;
+  padding-right: 20%;
 }
 
-.top-50-list li {
+.artists-top-50-list li {
   display: flex;
   align-items: center;
   padding: 12px 0;
   border-bottom: 1px solid #333;
+  overflow: hidden;
 }
 
 .artist-position {
   font-size: 20px;
   color: #b3b3b3;
   margin-right: 20px;
+  flex-shrink: 0;
 }
 
+/* Padding for cards */
 .artist-card {
   flex-grow: 1;
   margin-right: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .artist-card img {
   border-radius: 8px;
   max-width: 60px;
+  width: 60px;
 }
 
 /* Mobile Adjustments */
 @media (max-width: 768px) {
-  .podium {
-    flex-direction: row;
-    gap: 20px;
+  .artists-podium {
+    gap: 3vw;
+    margin-bottom: 30px;
   }
 
-  .podium .artist-podium img {
-    width: 120px;
-    height: 120px;
+  .artists-podium .first-place img {
+    width: 28vw; /* Increase size for mobile */
   }
 
-  .first-place img {
-    width: 140px;
-    height: 140px;
+  .artists-podium .second-place img,
+  .artists-podium .third-place img {
+    width: 22vw; /* Increase size for mobile */
   }
 
-  .top-50-list li {
+  .artists-top-50-list {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 55px;
+  }
+
+  .artists-top-50-list li {
     flex-direction: row;
     align-items: center;
     width: 100%;
@@ -138,25 +178,39 @@
   .artist-card {
     width: 100%;
     margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .artist-position {
     font-size: 18px;
+    margin-right: 10px;
   }
 }
 
-@media (max-width: 480px) {
-  .podium .artist-podium img {
-    width: 100px;
-    height: 100px;
-  }
+.artists-podium .artist-podium h3, 
+.tracks-podium .track-podium h3 {
+  text-align: center;
+  margin-top: 10px;
+  color: #fff;
+  max-width: 180px; /* Define a max width for the title */
+  overflow: hidden;
+  white-space: nowrap; /* Prevents wrapping */
+  text-overflow: ellipsis;
+  display: inline-block; /* Required for marquee to work */
+  position: relative;
+  animation: none; /* Disable animation initially */
+}
 
-  .first-place img {
-    width: 120px;
-    height: 120px;
+@media (max-width: 768px) {
+  .artists-podium .artist-podium h3, 
+  .tracks-podium .track-podium h3 {
+    max-width: 110px; /* Shorter width for mobile */
   }
-
-  .artist-position {
-    font-size: 16px;
+  
+  /* Apply marquee animation when the title is too long */
+  .artists-podium .artist-podium h3.marquee,
+  .tracks-podium .track-podium h3.marquee {
+    animation: marquee 10s linear infinite;
   }
 }

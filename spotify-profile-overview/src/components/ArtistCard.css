@@ -17,7 +17,7 @@
 .artist-image {
   width: 60px;
   height: 60px;
-  border-radius: 50%;
+  border-radius: 50%; /* This ensures the image will be a circle */
   margin-right: 15px;
 }
 

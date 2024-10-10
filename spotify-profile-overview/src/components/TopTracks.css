@@ -2,12 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 0; /* Apply padding only to top and bottom */
+  padding: 20px 0;
   min-height: 100vh;
   width: 100%;
   background-color: #121212;
 }
-
 
 .top-tracks-container .time-period-filter {
   display: flex;
@@ -66,25 +65,23 @@
   position: relative;
 }
 
+/* Ensure the podium tracks have a consistent rounded square appearance */
 .tracks-podium .track-podium img {
-  border-radius: 8px; /* Rounded square for the podium tracks */
+  border-radius: 16px; /* Rounded square with more subtle corners */
   transition: transform 0.3s ease;
+  object-fit: cover;
 }
 
-.tracks-podium .track-podium img {
+/* Ensure the top 1 track is visibly larger */
+.tracks-podium .first-place img {
   width: 12vw; /* Dynamic size based on viewport width */
-  height: 12vw; /* Match the width for circular shape */
-  border-radius: 50%; /* Ensure circular shape */
-  object-fit: cover; /* Ensure the image covers the entire area without distortion */
-  transition: transform 0.3s ease;
+  height: 12vw; /* Ensure width and height match for square shape */
 }
 
 .tracks-podium .second-place img,
 .tracks-podium .third-place img {
-  width: 10vw;
-  height: 10vw; /* Match width for circular shape */
-  border-radius: 50%; /* Ensure circular shape */
-  object-fit: cover;
+  width: 9vw;
+  height: 9vw; /* Match width for square shape */
 }
 
 /* Hover effect: scale up slightly */
@@ -157,15 +154,13 @@
 
   .tracks-podium .first-place img {
     width: 28vw; /* Larger size for mobile */
-    height: 28vw; /* Match width for circular shape */
-    border-radius: 50%;
+    height: 28vw; /* Match width for square shape */
   }
 
   .tracks-podium .second-place img,
   .tracks-podium .third-place img {
     width: 22vw; /* Smaller size for mobile */
-    height: 22vw; /* Match width for circular shape */
-    border-radius: 50%;
+    height: 22vw; /* Match width for square shape */
   }
 
   .tracks-top-50-list {
@@ -193,7 +188,6 @@
   }
 }
 
-
 /* Add this to both TopArtists.css and TopTracks.css podium titles */
 
 .artists-podium .artist-podium h3, 
@@ -215,12 +209,10 @@
   .tracks-podium .track-podium h3 {
     max-width: 110px; /* Shorter width for mobile */
   }
-  
+
   /* Apply marquee animation when the title is too long */
   .artists-podium .artist-podium h3.marquee,
   .tracks-podium .track-podium h3.marquee {
     animation: marquee 10s linear infinite;
   }
 }
-
-

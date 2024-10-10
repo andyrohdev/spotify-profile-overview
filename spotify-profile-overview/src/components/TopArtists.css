@@ -74,13 +74,13 @@
 /* Ensure the top 1 artist is visibly larger */
 .artists-podium .first-place img {
   width: 12vw; /* Dynamic size based on viewport width */
-  height: auto;
+  height: 13vh;
 }
 
 .artists-podium .second-place img,
 .artists-podium .third-place img {
   width: 9vw;
-  height: auto;
+  height: 10vh;
 }
 
 

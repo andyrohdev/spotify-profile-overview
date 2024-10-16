@@ -29,9 +29,11 @@ const RecentTracks = () => {
 
   return (
     <div className="recent-tracks-container">
+      <h1 className="recent-tracks-heading">Recently Played</h1>
       {recentTracks.length === 0 ? (
         <p>No recent tracks to display</p>
       ) : (
+        
         <ol className="tracks-list">
           {recentTracks.map((item, index) => (
             // Use `played_at` to ensure uniqueness

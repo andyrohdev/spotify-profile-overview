@@ -7,6 +7,15 @@
     width: 100%;
     background-color: #121212;
   }
+
+  .recent-tracks-heading {
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-top: 20px;
+  }
   
   /* Top 50 Recently Played Tracks */
   .tracks-list {

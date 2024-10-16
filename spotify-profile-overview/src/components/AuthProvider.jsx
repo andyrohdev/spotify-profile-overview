@@ -15,14 +15,24 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = () => {
-    const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
+    const CLIENT_ID = '3dbc0c6e8950478687663a14bae7adea';
     const REDIRECT_URI = window.location.hostname === 'localhost'
-      ? import.meta.env.VITE_REDIRECT_URI
-      : import.meta.env.VITE_PRODUCTION_REDIRECT_URI;
-    const AUTH_ENDPOINT = import.meta.env.VITE_AUTH_ENDPOINT;
-    const RESPONSE_TYPE = import.meta.env.VITE_RESPONSE_TYPE;
-    const SCOPES = import.meta.env.VITE_SCOPES;
+      ? 'http://localhost:5173/#/callback'
+      : 'https://andyrohdev.github.io/spotify-profile-overview/#/callback';
+    const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
+    const RESPONSE_TYPE = 'token';
     
+    // Add user-follow-read to get following information
+    const SCOPES = [
+      'user-read-private',
+      'user-read-email',
+      'user-top-read',
+      'playlist-read-private',
+      'playlist-read-collaborative',
+      'user-follow-read',
+      'user-read-recently-played'
+    ].join(' ');
+  
     const loginUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPES)}`;
     
     window.location.href = loginUrl;
@@ -33,6 +43,8 @@ export function AuthProvider({ children }) {
     window.localStorage.removeItem('isLoggedIn');  // Clear any login status
     window.location.reload();  // Reload to ensure the app returns to the login screen
   };
+
+
 
   return (
     <AuthContext.Provider value={{ token, setToken, login, logout }}>

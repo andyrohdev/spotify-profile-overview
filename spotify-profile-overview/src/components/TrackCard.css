@@ -3,11 +3,12 @@
   align-items: center;
   padding: 10px;
   background-color: #181818;
-  border-radius: 8px; /* Keep tracks as rounded squares */
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: 100%; /* Ensures the card takes full width */
-  box-sizing: border-box; /* Includes padding in the width calculation */
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* Ensure content doesn't overflow */
 }
 
 .track-card:hover {
@@ -17,13 +18,15 @@
 .track-image {
   width: 60px;
   height: 60px;
-  border-radius: 8px; /* Ensure track images are squares */
+  border-radius: 8px;
   margin-right: 15px;
-  object-fit: cover; /* Ensure proper fit for album artwork */
+  object-fit: cover;
 }
 
 .track-info {
   flex-grow: 1;
+  position: relative;
+  overflow: hidden; /* Hide overflow to manage long text scrolling */
 }
 
 .track-name {
@@ -31,6 +34,39 @@
   font-weight: 600;
   color: #fff;
   margin: 0;
+  white-space: nowrap; /* Ensure text stays on one line */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Default behavior is to add ellipsis for truncated text */
+  max-width: 250px; /* Adjust as per the card layout */
+  transition: transform 0.3s ease; /* Smooth animation */
+  position: relative;
+}
+
+/* Only apply this fade effect and scrolling when text overflows */
+.track-name.long-title::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(to left, #181818, rgba(24, 24, 24, 0)); /* Fade effect */
+}
+
+/* When hovering over a long title, start the scroll animation */
+.track-card:hover .track-name.long-title {
+  animation: scroll-text 10s linear infinite;
+  text-overflow: clip; /* Remove the ellipsis during scrolling */
+}
+
+/* Scroll animation to slide the text */
+@keyframes scroll-text {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 .track-artist {
@@ -52,6 +88,6 @@
 }
 
 .artist-link:hover {
-  color: #1db954; /* Spotify green */
+  color: #1db954;
   text-decoration: underline;
 }

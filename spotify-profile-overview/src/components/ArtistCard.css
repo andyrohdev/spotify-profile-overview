@@ -1,3 +1,9 @@
+.artist-card-link {
+  display: block; /* Makes the link a block-level element */
+  width: 100%; /* Ensures the link takes full width */
+  text-decoration: none; /* Removes underline from the link */
+}
+
 .artist-card {
   display: flex;
   align-items: center;

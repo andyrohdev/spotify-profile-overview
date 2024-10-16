@@ -9,6 +9,7 @@ import Sidebar from './components/Sidebar';
 import TopArtists from './components/TopArtists';
 import TopTracks from './components/TopTracks';
 import RecentTracks from './components/RecentTracks';  // Import the RecentTracks component
+import ArtistDetails from './components/ArtistDetails';  // Import the ArtistDetails component
 import './App.css';
 
 export default function App() {
@@ -53,7 +54,8 @@ export default function App() {
             <Route path="/" element={token ? <Profile /> : <LandingPage />} />
             <Route path="/artists" element={token ? <TopArtists /> : <LandingPage />} />
             <Route path="/tracks" element={token ? <TopTracks /> : <LandingPage />} />
-            <Route path="/recent" element={token ? <RecentTracks /> : <LandingPage />} />  {/* New route for RecentTracks */}
+            <Route path="/recent" element={token ? <RecentTracks /> : <LandingPage />} />
+            <Route path="/artist/:id" element={token ? <ArtistDetails /> : <LandingPage />} /> {/* Artist Detail Route */}
             <Route path="/callback" element={<Callback />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

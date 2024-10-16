@@ -44,3 +44,14 @@
   color: #b3b3b3;
   margin-left: 20px;
 }
+
+.artist-link {
+  color: #b3b3b3;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.artist-link:hover {
+  color: #1db954; /* Spotify green */
+  text-decoration: underline;
+}

@@ -1,0 +1,101 @@
+/* Artist Details Container */
+.artist-details__container {
+  text-align: center;
+  color: white;
+  padding: 20px;
+  background-color: #121212;
+}
+
+/* Banner */
+.artist-details__banner {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+.artist-details__banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Artist Information */
+.artist-details__name {
+  font-size: 36px;
+  margin-top: 20px;
+}
+
+.artist-details__followers,
+.artist-details__popularity,
+.artist-details__genres,
+.artist-details__spotify-link {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.artist-details__spotify-link a {
+  color: #1DB954;
+  text-decoration: none;
+}
+
+.artist-details__spotify-link a:hover {
+  text-decoration: underline;
+}
+
+/* Sections */
+.artist-details__section {
+  margin-top: 30px;
+}
+
+.artist-details__section-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+/* Albums Section */
+.artist-details__albums-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.artist-details__album-card {
+  margin: 10px;
+  text-align: center;
+  color: #fff;
+}
+
+.artist-details__album-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Top Tracks Section */
+.artist-details__tracks-list {
+  list-style: none;
+  padding: 0;
+  font-size: 18px;
+}
+
+/* Related Artists Section */
+.artist-details__related-artists-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.artist-details__related-artist-card {
+  margin: 10px;
+  text-align: center;
+  color: #fff;
+}
+
+.artist-details__related-artist-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}

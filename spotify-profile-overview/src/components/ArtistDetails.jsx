@@ -64,7 +64,7 @@ const ArtistDetails = () => {
       const response = await axios.get(`https://api.spotify.com/v1/artists/${id}/related-artists`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setRelatedArtists(response.data.artists);
+      setRelatedArtists(response.data.artists.slice(0, 5)); // Limit related artists to 5
     } catch (error) {
       console.error('Error fetching related artists:', error);
     }
@@ -100,6 +100,9 @@ const ArtistDetails = () => {
             <p>{artist.popularity}%</p>
             <span>Popularity</span>
           </div>
+        </div>
+        {/* Separated Genre Section */}
+        <div className="artist-details__genres-container">
           <div className="artist-genres">
             {artist.genres.map((genre, index) => (
               <span key={index} className="genre-tag">{genre}</span>
@@ -134,7 +137,7 @@ const ArtistDetails = () => {
         <h2 className="artist-details__section-title">Related Artists</h2>
         <div className="artist-details__related-artists-container">
           {relatedArtists.map((relatedArtist) => (
-            <ArtistCard key={relatedArtist.id} artist={relatedArtist} />
+            <ArtistCard key={relatedArtist.id} artist={relatedArtist} className="artist-details__related-artist" />
           ))}
         </div>
       </div>

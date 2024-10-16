@@ -6,8 +6,9 @@ import NotFound from './components/NotFound';
 import Callback from './components/Callback';
 import LandingPage from './components/LandingPage';
 import Sidebar from './components/Sidebar';
-import TopArtists from './components/TopArtists';  // Import the TopArtists component
-import TopTracks from './components/TopTracks';    // Import the TopTracks component
+import TopArtists from './components/TopArtists';
+import TopTracks from './components/TopTracks';
+import RecentTracks from './components/RecentTracks';  // Import the RecentTracks component
 import './App.css';
 
 export default function App() {
@@ -50,8 +51,9 @@ export default function App() {
         <div className="main-content">
           <Routes>
             <Route path="/" element={token ? <Profile /> : <LandingPage />} />
-            <Route path="/artists" element={token ? <TopArtists /> : <LandingPage />} /> {/* Route for TopArtists */}
-            <Route path="/tracks" element={token ? <TopTracks /> : <LandingPage />} />   {/* New route for TopTracks */}
+            <Route path="/artists" element={token ? <TopArtists /> : <LandingPage />} />
+            <Route path="/tracks" element={token ? <TopTracks /> : <LandingPage />} />
+            <Route path="/recent" element={token ? <RecentTracks /> : <LandingPage />} />  {/* New route for RecentTracks */}
             <Route path="/callback" element={<Callback />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

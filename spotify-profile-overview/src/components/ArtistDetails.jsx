@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './ArtistDetails.css';
+import TrackCard from './TrackCard'; // Import TrackCard
+import AlbumCard from './AlbumCard'; // Import AlbumCard
+import ArtistCard from './ArtistCard'; // Import ArtistCard
 
 const ArtistDetails = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const [artist, setArtist] = useState(null);
   const [albums, setAlbums] = useState([]);
   const [topTracks, setTopTracks] = useState([]);
@@ -34,7 +37,7 @@ const ArtistDetails = () => {
       const token = localStorage.getItem('token');
       const response = await axios.get(`https://api.spotify.com/v1/artists/${id}/albums`, {
         headers: { Authorization: `Bearer ${token}` },
-        params: { limit: 10 },
+        params: { limit: 6 }, // Limit the albums to 6
       });
       setAlbums(response.data.items);
     } catch (error) {
@@ -73,63 +76,57 @@ const ArtistDetails = () => {
 
   return (
     <div className="artist-details__container">
-      {/* Banner */}
-      <div className="artist-details__banner">
-        <img src={artist.images[0]?.url} alt={artist.name} className="artist-details__banner-image" />
-      </div>
-
-      {/* Artist Name */}
-      <h1 className="artist-details__name">{artist.name}</h1>
-
-      {/* Followers */}
-      <p className="artist-details__followers">
-        <strong>Followers:</strong> {artist.followers.total.toLocaleString()}
-      </p>
-
-      {/* Popularity */}
-      <p className="artist-details__popularity">
-        <strong>Popularity:</strong> {artist.popularity}/100
-      </p>
-
-      {/* Genres */}
-      {artist.genres.length > 0 && (
-        <p className="artist-details__genres">
-          <strong>Genres:</strong> {artist.genres.join(', ')}
-        </p>
-      )}
-
-      {/* External Spotify URL */}
-      <p className="artist-details__spotify-link">
-        <strong>Spotify Profile:</strong>{' '}
-        <a href={artist.external_urls.spotify} target="_blank" rel="noopener noreferrer">
-          {artist.name}'s Spotify
+      {/* Profile Section */}
+      <div className="artist-details__header">
+        <img
+          src={artist.images[0]?.url}
+          alt={artist.name}
+          className="artist-details__picture"
+        />
+        <a
+          href={artist.external_urls.spotify}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="artist-details__name-link"
+        >
+          <h1 className="artist-details__name">{artist.name}</h1>
         </a>
-      </p>
-
-      {/* Artist Albums */}
-      <div className="artist-details__section">
-        <h2 className="artist-details__section-title">Albums</h2>
-        <div className="artist-details__albums-container">
-          {albums.map((album) => (
-            <div key={album.id} className="artist-details__album-card">
-              <img src={album.images[0]?.url} alt={album.name} className="artist-details__album-image" />
-              <p>{album.name}</p>
-              <p>{new Date(album.release_date).getFullYear()}</p>
-            </div>
-          ))}
+        <div className="artist-details__stats">
+          <div className="stat-item">
+            <p>{artist.followers.total.toLocaleString()}</p>
+            <span>Followers</span>
+          </div>
+          <div className="stat-item">
+            <p>{artist.popularity}%</p>
+            <span>Popularity</span>
+          </div>
+          <div className="artist-genres">
+            {artist.genres.map((genre, index) => (
+              <span key={index} className="genre-tag">{genre}</span>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Top Tracks */}
-      <div className="artist-details__section">
-        <h2 className="artist-details__section-title">Top Tracks</h2>
-        <ol className="artist-details__tracks-list">
-          {topTracks.map((track, index) => (
-            <li key={track.id}>
-              {index + 1}. {track.name} - {formatDuration(track.duration_ms)}
-            </li>
-          ))}
-        </ol>
+      {/* Side-by-side Tracks and Albums */}
+      <div className="artist-details__content">
+        <div className="artist-details__section">
+          <h2 className="artist-details__section-title">Top Tracks</h2>
+          <div className="artist-details__tracks-list">
+            {topTracks.map((track) => (
+              <TrackCard key={track.id} track={track} />
+            ))}
+          </div>
+        </div>
+
+        <div className="artist-details__section">
+          <h2 className="artist-details__section-title">Recent Albums</h2>
+          <div className="artist-details__albums-container">
+            {albums.map((album) => (
+              <AlbumCard key={album.id} album={album} />
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Related Artists */}
@@ -137,25 +134,12 @@ const ArtistDetails = () => {
         <h2 className="artist-details__section-title">Related Artists</h2>
         <div className="artist-details__related-artists-container">
           {relatedArtists.map((relatedArtist) => (
-            <div key={relatedArtist.id} className="artist-details__related-artist-card">
-              <img
-                src={relatedArtist.images[0]?.url}
-                alt={relatedArtist.name}
-                className="artist-details__related-artist-image"
-              />
-              <p>{relatedArtist.name}</p>
-            </div>
+            <ArtistCard key={relatedArtist.id} artist={relatedArtist} />
           ))}
         </div>
       </div>
     </div>
   );
 };
-
-function formatDuration(ms) {
-  const minutes = Math.floor(ms / 60000);
-  const seconds = ((ms % 60000) / 1000).toFixed(0);
-  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-}
 
 export default ArtistDetails;

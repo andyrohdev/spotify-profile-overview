@@ -1,0 +1,87 @@
+.recent-tracks-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    min-height: 100vh;
+    width: 100%;
+    background-color: transparent;
+  }
+
+  .recent-tracks-heading {
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-top: 20px;
+  }
+  
+  /* Top 50 Recently Played Tracks */
+  .tracks-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+  
+  .tracks-list li {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #333;
+    overflow: hidden;
+  }
+  
+  .track-position {
+    font-size: 20px;
+    color: #b3b3b3;
+    margin-right: 20px;
+    flex-shrink: 0;
+  }
+  
+  .track-card {
+    flex-grow: 1;
+    margin-right: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .track-card img {
+    border-radius: 8px;
+    max-width: 60px;
+    width: 60px;
+  }
+  
+  /* Mobile Adjustments */
+  @media (max-width: 768px) {
+    .tracks-list {
+      padding-left: 20px;
+      padding-right: 20px;
+      margin-bottom: 55px;
+    }
+  
+    .tracks-list li {
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+    }
+  
+    .track-card {
+      width: 100%;
+      margin-right: 10px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  
+    .track-position {
+      font-size: 18px;
+      margin-right: 10px;
+    }
+  }
+  

@@ -1,0 +1,174 @@
+/* Artist Details Container */
+.artist-details__container {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100px 20px;
+  margin: 0 auto;
+  background-color: transparent;
+}
+
+/* Profile Header Section */
+.artist-details__header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.artist-details__picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+
+/* Artist Name with hover animation */
+.artist-details__name {
+  font-size: 48px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 5px;
+  transition: color 0.3s ease;
+}
+
+.artist-details__name-link {
+  text-decoration: none;
+}
+
+.artist-details__name-link:hover .artist-details__name {
+  color: #1db954;
+}
+
+/* Stats Section */
+.artist-details__stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-top: 5px;
+  color: #1db954;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-item p {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.stat-item span {
+  font-size: 14px;
+  color: #b3b3b3;
+}
+
+/* Separate Genres */
+.artist-details__genres-container {
+  margin-top: 10px;
+}
+
+.artist-genres {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.genre-tag {
+  background-color: #282828;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 14px;
+  color: #fff;
+}
+
+/* Sections */
+.artist-details__section {
+  width: 100%;
+  margin-top: 30px;
+  text-align: left;
+}
+
+/* Side-by-side layout for Tracks and Albums */
+.artist-details__content {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+/* Top Tracks Section */
+.artist-details__tracks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+/* Albums Section */
+.artist-details__albums-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px; /* Reduced for better mobile view */
+  flex: 1;
+}
+
+.album-card {
+  width: 200px; /* Default width */
+  height: auto;
+}
+
+.album-card img {
+  width: 100%;
+  height: auto;
+}
+
+/* Related Artists Section */
+.artist-details__related-artists-container {
+  display: flex;  /* Use Flexbox instead of Grid */
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Adjust spacing for consistent alignment */
+  align-items: center;
+  margin-top: 20px;
+}
+
+.artist-details__related-artist {
+  width: 150px; /* Ensure consistent size for ArtistCard */
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  .artist-details__stats {
+    gap: 10px;
+  }
+
+  .artist-details__content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .artist-details__albums-container {
+    gap: 0px; /* Reduce spacing between albums on mobile */
+  }
+
+  .album-card {
+    width: 100px; /* Make album cards smaller on mobile */
+  }
+
+  .album-card img {
+    width: 80%;
+    height: auto;
+  }
+
+  .artist-details__related-artists-container {
+    gap: 15px;
+  }
+}

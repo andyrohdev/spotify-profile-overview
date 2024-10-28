@@ -1,106 +1,220 @@
+/* Sidebar layout */
 .sidebar {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #000;
+  width: 100px; /* Sidebar width for desktop */
+  height: 100vh;
+  padding: 20px 0;
+  overflow-y: auto; /* Allow the sidebar to scroll if needed */
+  position: fixed; /* Keep sidebar fixed */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Ensure it stays on top */
+}
+
+.logo-container {
+  margin-bottom: 30px;
+}
+
+.logo {
+  color: #1db954;
+  font-size: 40px;
+}
+
+/* Sidebar links */
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.sidebar-links a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #b3b3b3;
+  margin-bottom: 20px;
+  width: 100%;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.sidebar-links a .text {
+  font-size: 10px; /* Reduced text size */
+}
+
+.sidebar-links a:hover,
+.sidebar-links a.active {
+  color: white;
+}
+
+/* Desktop animation for green highlight */
+.sidebar-links a.active::before,
+.sidebar-links a:hover::before {
+  content: '';
+  width: 5px;
+  height: 100%;
+  background-color: #1db954;
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: slideInDesktop 0.3s ease forwards;
+}
+
+/* Slide-out animation for non-active and non-hovered */
+.sidebar-links a:not(.active):not(:hover)::before {
+  animation: slideOutDesktop 0.3s ease forwards;
+}
+
+/* Slide-in animation for active and hover */
+@keyframes slideInDesktop {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+/* Slide-out animation */
+@keyframes slideOutDesktop {
+  from {
+    height: 100%;
+  }
+  to {
+    height: 0;
+  }
+}
+
+.sidebar-links .icon {
+  font-size: 26px; /* Increased icon size for consistency */
+  margin-bottom: 5px;
+}
+
+/* Move Portfolio and GitHub to bottom-left on desktop */
+.sidebar-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  bottom: 20px; /* Align to bottom */
+  left: 20px; /* Align to the left corner */
+  margin-bottom: 20px;
+}
+
+.sidebar-bottom a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #b3b3b3;
+  margin-bottom: 20px;
+  transition: color 0.3s;
+}
+
+.sidebar-bottom a:hover {
+  color: white;
+}
+
+.github-icon {
+  font-size: 28px; /* Adjusted GitHub icon size */
+  transition: color 0.3s ease;
+}
+
+.github-icon:hover {
+  color: #1db954; /* Green color on hover */
+}
+
+.portfolio-label {
+  font-size: 14px; /* Label for portfolio */
+  color: #b3b3b3;
+}
+
+.sidebar-bottom a:hover .portfolio-label {
+  color: white;
+}
+
+/* Prevent horizontal scrolling but allow vertical */
+body, html {
+  overflow-x: hidden; /* Block horizontal scrolling */
+  overflow-y: auto;   /* Allow vertical scrolling */
+}
+
+.main-content {
+  overflow-y: auto; /* Ensure the main content can scroll vertically */
+  margin-left: 100px; /* Ensure space for the sidebar */
+}
+
+/* Media query for mobile screens */
+@media (max-width: 768px) {
+  .sidebar {
+    flex-direction: row; /* Change the sidebar to row */
+    justify-content: space-around; /* Distribute items evenly */
     align-items: center;
-    background-color: #000;
-    width: 80px;
-    height: 100vh;
-    padding: 20px 0;
+    width: 100%; /* Take up full width of the screen */
+    height: 80px; /* Taller sidebar on mobile */
+    bottom: 0; /* Position it at the bottom of the viewport */
+    top: auto; /* Remove top alignment */
+    left: 0;
+    right: 0;
+    padding: 0;
+    position: fixed; /* Fixed position at bottom */
+    z-index: 1000;
   }
-  
-  .logo-container {
-    margin-bottom: 30px;
+
+  .logo-container,
+  .sidebar-bottom {
+    display: none;
   }
-  
-  .logo {
-    color: #1db954;
-    font-size: 40px;
-  }
-  
+
   .sidebar-links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row; /* Make the sidebar links row-based */
+    justify-content: space-around;
     width: 100%;
   }
-  
+
   .sidebar-links a {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: #b3b3b3;
-    margin-bottom: 20px;
-    width: 100%;
-    position: relative;
-    transition: color 0.3s ease;
+    margin-bottom: 0;
   }
-  
-  .sidebar-links a .text {
-    font-size: 12px; /* Reduced text size */
-  }
-  
-  .sidebar-links a:hover,
-  .sidebar-links a.active {
-    color: white;
-  }
-  
-  /* Animation for green highlight */
+
+  /* Mobile-specific animation for green highlight */
   .sidebar-links a.active::before,
   .sidebar-links a:hover::before {
     content: '';
-    width: 5px;
-    height: 100%;
+    height: 5px;
     background-color: #1db954;
     position: absolute;
     left: 0;
-    top: 0;
-    animation: slideIn 0.3s ease; /* Add animation */
+    top: -17px;
+    width: 100%; /* Full width */
+    animation: slideInMobile 0.3s ease forwards;
   }
-  
-  @keyframes slideIn {
+
+  /* Mobile-specific slide-out animation */
+  .sidebar-links a:not(.active):not(:hover)::before {
+    animation: slideOutMobile 0.3s ease forwards;
+  }
+
+  @keyframes slideInMobile {
     from {
-      width: 0;
+      height: 0;
     }
     to {
-      width: 5px;
+      height: 5px;
     }
   }
-  
-  .sidebar-links .icon {
-    font-size: 22px; /* Slightly reduced icon size */
-    margin-bottom: 5px;
+
+  @keyframes slideOutMobile {
+    from {
+      height: 5px;
+    }
+    to {
+      height: 0;
+    }
   }
-  
-  .sidebar-bottom {
-    margin-top: auto;
-  }
-  
-  .sidebar-bottom a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: #b3b3b3;
-    margin-bottom: 20px;
-    transition: color 0.3s;
-  }
-  
-  .sidebar-bottom a:hover {
-    color: white;
-  }
-  
-  .sidebar-bottom .icon {
-    font-size: 30px; /* Adjusted icon size */
-    margin-bottom: 5px;
-  }
-  
-  .sidebar-bottom .portfolio-label {
-    font-size: 14px; /* Label for portfolio */
-    color: #b3b3b3;
-  }
-  
-  .sidebar-bottom a:hover .portfolio-label {
-    color: white;
-  }
-  
+}

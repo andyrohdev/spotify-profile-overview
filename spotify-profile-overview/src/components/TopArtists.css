@@ -1,0 +1,220 @@
+.top-artists-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  min-height: 100vh;
+  width: 100%;
+  background-color: transparent;
+}
+
+.top-artists-container .time-period-filter {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.top-artists-container .time-period-filter span {
+  font-size: 18px;
+  margin: 0 15px;
+  cursor: pointer;
+  color: #b3b3b3;
+  padding-bottom: 5px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.top-artists-container .time-period-filter span.active {
+  color: #1db954;
+  border-bottom-color: #1db954;
+}
+
+/* Podium for the top 3 artists */
+.artists-podium {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center the artists vertically */
+  margin-bottom: 60px;
+  max-width: 100%;
+  position: relative;
+  overflow: visible;
+}
+
+/* Ensure the top artist is centered and visibly larger */
+.artists-podium .first-place {
+  order: 1;
+  z-index: 1;
+}
+
+.artists-podium .second-place {
+  order: 0;
+}
+
+.artists-podium .third-place {
+  order: 2;
+}
+
+/* Podium artist styling with circular images */
+.artists-podium .artist-podium {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.artists-podium .artist-podium img {
+  width: 12vw;
+  height: 12vw; /* Ensures circular images */
+  border-radius: 50%;
+  object-fit: cover; /* Ensures the image covers the entire area */
+  transition: transform 0.3s ease;
+}
+
+.artists-podium .second-place img,
+.artists-podium .third-place img {
+  width: 10vw;
+  height: 10vw;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Hover effect: scale up slightly */
+.artists-podium .artist-podium:hover img {
+  transform: scale(1.1);
+}
+
+/* Padding for the podium to prevent clipping */
+.artists-podium .artist-podium {
+  margin: 0 2vw;
+}
+
+.artists-podium .artist-podium h3 {
+  text-align: center;
+  margin-top: 10px;
+  color: #fff;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Top 50 Artists */
+.artists-top-50-list {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.artists-top-50-list li {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #333;
+  overflow: hidden;
+  width: 100%; /* Ensure li expands to full width */
+  flex-grow: 1; /* Allow the li to take available space */
+  box-sizing: border-box;
+}
+
+
+.artist-position {
+  font-size: 20px;
+  color: #b3b3b3;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+
+/* Artist card styling */
+.artist-card {
+  flex-grow: 1;
+  margin-right: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ensure circular images for artist cards */
+.artist-card img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%; /* Ensures the image remains circular */
+  object-fit: cover;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .artists-podium {
+    gap: 3vw;
+    margin-bottom: 30px;
+  }
+
+  .artists-podium .first-place img {
+    width: 28vw;
+    height: 28vw;
+    border-radius: 50%;
+  }
+
+  .artists-podium .second-place img,
+  .artists-podium .third-place img {
+    width: 22vw;
+    height: 22vw;
+    border-radius: 50%;
+  }
+
+  .artists-top-50-list {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 55px;
+  }
+
+  .artists-top-50-list li {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+  }
+
+  .artist-card {
+    width: 100%;
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .artist-position {
+    font-size: 18px;
+    margin-right: 10px;
+  }
+}
+
+.artists-podium .artist-podium h3, 
+.tracks-podium .track-podium h3 {
+  text-align: center;
+  margin-top: 10px;
+  color: #fff;
+  max-width: 180px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline-block;
+  position: relative;
+  animation: none;
+}
+
+@media (max-width: 768px) {
+  .artists-podium .artist-podium h3, 
+  .tracks-podium .track-podium h3 {
+    max-width: 110px;
+  }
+
+  .artists-podium .artist-podium h3.marquee,
+  .tracks-podium .track-podium h3.marquee {
+    animation: marquee 10s linear infinite;
+  }
+}

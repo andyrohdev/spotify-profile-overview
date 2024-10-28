@@ -29,16 +29,14 @@ export function AuthProvider({ children }) {
       'user-top-read',
       'playlist-read-private',
       'playlist-read-collaborative',
-      'user-follow-read'
+      'user-follow-read',
+      'user-read-recently-played'
     ].join(' ');
   
     const loginUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPES)}`;
     
     window.location.href = loginUrl;
   };
-  
-
-
 
   const logout = () => {
     window.localStorage.removeItem('token');  // Remove the token

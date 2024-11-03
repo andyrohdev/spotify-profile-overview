@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './TopArtists.css';
 import ArtistCard from './ArtistCard';
@@ -76,7 +77,8 @@ const TopArtists = () => {
         <>
           <div className="artists-podium">
             {top3Artists.map((artist, index) => (
-              <div
+              <Link
+                to={`/artist/${artist.id}`}
                 key={artist.id}
                 className={`artist-podium ${index === 0 ? 'first-place' : index === 1 ? 'second-place' : 'third-place'}`}
               >
@@ -86,7 +88,7 @@ const TopArtists = () => {
                 <div className='marquee-wrapper'>
                   <h3>{artist.name}</h3>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 

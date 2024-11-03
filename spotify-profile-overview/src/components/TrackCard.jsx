@@ -1,23 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './TrackCard.css';  // Import the CSS for styling
+import { Link, useNavigate } from 'react-router-dom';
+import './TrackCard.css'; // Import the CSS for styling
 
 export default function TrackCard({ track }) {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/track/${track.id}`);
+  };
+
   return (
-    <div className="track-card">
+    <div className="track-card" onClick={handleCardClick}>
       <img src={track.album.images[0]?.url} alt={track.name} className="track-image" />
       <div className="track-info">
         <h3 className="track-name">{track.name}</h3>
         <p className="track-artist">
-          {track.artists.map((artist) => (
-            <Link 
-              key={artist.id} 
-              to={`/artist/${artist.id}`} // Navigate to artist detail page with artist ID
-              className="artist-link"
-            >
-              {artist.name}
-            </Link>
-          )).reduce((prev, curr) => [prev, ', ', curr])} {/* Add comma between artists */}
+          {track.artists.map((artist, index) => (
+            <span key={artist.id}>
+              <Link
+                to={`/artist/${artist.id}`}
+                className="artist-link"
+                onClick={(e) => e.stopPropagation()} // Prevents parent click event
+              >
+                {artist.name}
+              </Link>
+              {index < track.artists.length - 1 && ', '}
+            </span>
+          ))}
         </p>
       </div>
       <p className="track-duration">{formatDuration(track.duration_ms)}</p>

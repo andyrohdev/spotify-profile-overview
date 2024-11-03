@@ -10,6 +10,7 @@ import TopArtists from './components/TopArtists';
 import TopTracks from './components/TopTracks';
 import RecentTracks from './components/RecentTracks';  // Import the RecentTracks component
 import ArtistDetails from './components/ArtistDetails';  // Import the ArtistDetails component
+import TrackDetails from './components/TrackDetails';  // Import the TrackDetails component
 import './App.css';
 
 export default function App() {
@@ -56,6 +57,7 @@ export default function App() {
             <Route path="/tracks" element={token ? <TopTracks /> : <LandingPage />} />
             <Route path="/recent" element={token ? <RecentTracks /> : <LandingPage />} />
             <Route path="/artist/:id" element={token ? <ArtistDetails /> : <LandingPage />} /> {/* Artist Detail Route */}
+            <Route path="/track/:trackId" element={token ? <TrackDetails /> : <LandingPage />} /> {/* Track Detail Route */}
             <Route path="/callback" element={<Callback />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

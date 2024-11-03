@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './TopTracks.css';
 import TrackCard from './TrackCard';
@@ -76,15 +77,16 @@ const TopTracks = () => {
         <>
           <div className="tracks-podium">
             {top3Tracks.map((track, index) => (
-              <div
+              <Link
+                to={`/track/${track.id}`}
                 key={track.id}
                 className={`track-podium ${index === 0 ? 'first-place' : index === 1 ? 'second-place' : 'third-place'}`}
               >
                 <img src={track.album.images[0]?.url} alt={track.name} />
                 <div className='marquee-wrapper'>
-                <h3>{track.name}</h3>
+                  <h3>{track.name}</h3>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 

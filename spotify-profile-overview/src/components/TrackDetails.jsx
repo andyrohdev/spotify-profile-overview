@@ -24,9 +24,10 @@ const TrackDetails = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
-  const audioRef = useRef(new Audio());
+  const audioRef = useRef(null);
 
   useEffect(() => {
+    audioRef.current = new Audio();
     fetchTrackDetails();
     fetchAudioFeatures();
     fetchAudioAnalysis();
@@ -34,12 +35,14 @@ const TrackDetails = () => {
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
+        audioRef.current.src = ''; // Clear the source
       }
     };
   }, [trackId]);
 
   useEffect(() => {
-    if (audioRef.current) {
+    if (track && track.preview_url) {
+      audioRef.current.src = track.preview_url;
       audioRef.current.onloadedmetadata = () => {
         setDuration(audioRef.current.duration);
       };
@@ -47,7 +50,7 @@ const TrackDetails = () => {
         setCurrentTime(audioRef.current.currentTime);
       };
     }
-  }, []);
+  }, [track]);
 
   const fetchTrackDetails = async () => {
     try {
@@ -58,9 +61,6 @@ const TrackDetails = () => {
         },
       });
       setTrack(response.data);
-      if (response.data.preview_url) {
-        audioRef.current.src = response.data.preview_url;
-      }
     } catch (error) {
       console.error('Error fetching track details:', error);
     }
@@ -201,7 +201,6 @@ const TrackDetails = () => {
                   />
                 </div>
               </div>
-              <audio ref={audioRef} />
             </div>
           )}
         </div>

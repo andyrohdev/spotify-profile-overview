@@ -135,7 +135,7 @@ export default function Profile() {
           {/* Profile Section */}
           <div className="profile-header">
             <img
-              src={profileData.images?.[1]?.url || 'https://www.gravatar.com/avatar/placeholder-url-here?d=mp'}
+              src={profileData.images?.[0]?.url || 'https://www.gravatar.com/avatar/placeholder-url-here?d=mp'}
               alt={profileData.display_name}
               className="profile-picture"
             />

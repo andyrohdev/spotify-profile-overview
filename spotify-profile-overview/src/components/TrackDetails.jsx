@@ -21,13 +21,33 @@ const TrackDetails = () => {
   const [audioFeatures, setAudioFeatures] = useState(null);
   const [audioAnalysis, setAudioAnalysis] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef(null); // Use useRef instead of useState
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(1);
+  const audioRef = useRef(new Audio());
 
   useEffect(() => {
     fetchTrackDetails();
     fetchAudioFeatures();
     fetchAudioAnalysis();
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
   }, [trackId]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.onloadedmetadata = () => {
+        setDuration(audioRef.current.duration);
+      };
+      audioRef.current.ontimeupdate = () => {
+        setCurrentTime(audioRef.current.currentTime);
+      };
+    }
+  }, []);
 
   const fetchTrackDetails = async () => {
     try {
@@ -38,7 +58,7 @@ const TrackDetails = () => {
         },
       });
       setTrack(response.data);
-      if (response.data.preview_url && audioRef.current) {
+      if (response.data.preview_url) {
         audioRef.current.src = response.data.preview_url;
       }
     } catch (error) {
@@ -75,12 +95,30 @@ const TrackDetails = () => {
   };
 
   const togglePlay = () => {
+    if (!audioRef.current) return;
+
     if (isPlaying) {
       audioRef.current.pause();
     } else {
-      audioRef.current.play();
+      audioRef.current.play().catch(error => {
+        if (error.name !== 'AbortError') {
+          console.error('Error trying to play the audio:', error);
+        }
+      });
     }
     setIsPlaying(!isPlaying);
+  };
+
+  const handleVolumeChange = (e) => {
+    const newVolume = e.target.value;
+    setVolume(newVolume);
+    audioRef.current.volume = newVolume;
+  };
+
+  const handleProgressChange = (e) => {
+    const newTime = e.target.value;
+    audioRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
   };
 
   if (!track || !audioFeatures || !audioAnalysis) return <p>Loading track details...</p>;
@@ -135,10 +173,34 @@ const TrackDetails = () => {
           <p className="track-details-number">Track Number: {track.track_number}</p>
 
           {track.preview_url && (
-            <div className="track-details-audio-preview">
-              <button className={`track-details-play-button ${isPlaying ? 'playing' : ''}`} onClick={togglePlay}>
+            <div className="track-details-audio-controls">
+              <button
+                className={`track-details-play-button ${isPlaying ? 'playing' : ''}`}
+                onClick={togglePlay}
+              >
                 {isPlaying ? 'Pause' : 'Play'}
               </button>
+              <div className="track-details-slider-container">
+                <input
+                  type="range"
+                  className="track-details-progress"
+                  value={currentTime}
+                  max={duration}
+                  onChange={handleProgressChange}
+                />
+                <div className="track-details-volume-container">
+                  <i className="volume-icon">🔊</i>
+                  <input
+                    type="range"
+                    className="track-details-volume"
+                    value={volume}
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    onChange={handleVolumeChange}
+                  />
+                </div>
+              </div>
               <audio ref={audioRef} />
             </div>
           )}
@@ -148,16 +210,36 @@ const TrackDetails = () => {
       <div className="track-details-audio-features-section">
         <h3>Audio Analysis</h3>
         <div className="track-details-info-grid">
-          <div className="track-details-info-item"><span>{formatDuration(track.duration_ms)}</span><p>Duration</p></div>
-          <div className="track-details-info-item"><span>{key}</span><p>Key</p></div>
-          <div className="track-details-info-item"><span>{audioFeatures.mode === 1 ? 'Major' : 'Minor'}</span><p>Modality</p></div>
-          <div className="track-details-info-item"><span>{audioFeatures.time_signature}</span><p>Time Signature</p></div>
-          <div className="track-details-info-item"><span>{audioFeatures.tempo.toFixed(1)}</span><p>Tempo (BPM)</p></div>
-          <div className="track-details-info-item"><span>{audioAnalysis.bars.length}</span><p>Bars</p></div>
-          <div className="track-details-info-item"><span>{audioAnalysis.beats.length}</span><p>Beats</p></div>
-          <div className="track-details-info-item"><span>{audioAnalysis.sections.length}</span><p>Sections</p></div>
-          <div className="track-details-info-item"><span>{audioAnalysis.segments.length}</span><p>Segments</p></div>
-          <div className="track-details-info-item"><span>{track.popularity}%</span><p>Popularity</p></div>
+          <div className="track-details-info-item">
+            <span>{formatDuration(track.duration_ms)}</span><p>Duration</p>
+          </div>
+          <div className="track-details-info-item">
+            <span>{key}</span><p>Key</p>
+          </div>
+          <div className="track-details-info-item">
+            <span>{audioFeatures.mode === 1 ? 'Major' : 'Minor'}</span><p>Modality</p>
+          </div>
+          <div className="track-details-info-item">
+            <span>{audioFeatures.time_signature}</span><p>Time Signature</p>
+          </div>
+          <div className="track-details-info-item">
+            <span>{audioFeatures.tempo.toFixed(1)}</span><p>Tempo (BPM)</p>
+          </div>
+          <div className="track-details-info-item">
+            <span>{audioAnalysis.bars.length}</span><p>Bars</p>
+          </div>
+          <div className="track-details-info-item">
+            <span>{audioAnalysis.beats.length}</span><p>Beats</p>
+          </div>
+          <div className="track-details-info-item">
+            <span>{audioAnalysis.sections.length}</span><p>Sections</p>
+          </div>
+          <div className="track-details-info-item">
+            <span>{audioAnalysis.segments.length}</span><p>Segments</p>
+          </div>
+          <div className="track-details-info-item">
+            <span>{track.popularity}%</span><p>Popularity</p>
+          </div>
         </div>
         <div className="track-details-chart-container">
           <Bar
